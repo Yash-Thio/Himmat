@@ -61,7 +61,6 @@ export async function handleUpdateUser(
   if (updatedUser.username && !usernameAllowed(updatedUser.username)) {
     throw GQLError(400, "Invalid username");
   }
-  console.log("*******************************88Updating user", ctx.userId, updatedUser);
   const [user] = await db
     .update(UserTable)
     .set({
