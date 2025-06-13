@@ -2,24 +2,34 @@ import type { AuthorizedContext } from "@backend/lib/auth/context";
 import GQLError from "@backend/lib/constants/errors";
 import { db } from "@backend/lib/db";
 import { UserTable } from "../db";
+import { TrustedTable } from "../../Trusted/db";
 import { usernameAllowed } from "@graphql/User/utils";
 import {
   IsDateString,
-  IsEnum,
-  IsIn,
   IsNumberString,
-  IsUrl,
   Matches,
   MaxLength,
+  ArrayMaxSize,
+  ValidateNested,
+  IsArray,
+  IsEmail,
 } from "class-validator";
 import { eq } from "drizzle-orm";
 import { revalidateTag } from "next/cache";
 import { Field, InputType } from "type-graphql";
-import {
-  NAME_MAX_LENGTH,
-  USERNAME_MAX_LENGTH,
-} from "@/constants/constraints";
+import { NAME_MAX_LENGTH, USERNAME_MAX_LENGTH } from "@/constants/constraints";
 import { USERNAME_REGEX } from "@/constants/regex";
+
+@InputType("TrustedContactInput")
+export class TrustedContactInput {
+  @Field()
+  @IsEmail()
+  email!: string;
+
+  @Field()
+  @MaxLength(NAME_MAX_LENGTH)
+  name!: string;
+}
 
 @InputType("UpdateUserInput")
 export class UpdateUserInput {
@@ -37,15 +47,21 @@ export class UpdateUserInput {
   @Field({ nullable: true })
   @IsDateString()
   dob?: string;
+  @Field(() => [TrustedContactInput], { nullable: true })
+  @IsArray()
+  @ValidateNested({ each: true })
+  @ArrayMaxSize(5)
+  trusties?: TrustedContactInput[];
 }
 
 export async function handleUpdateUser(
   ctx: AuthorizedContext,
-  updatedUser: UpdateUserInput,
+  updatedUser: UpdateUserInput
 ) {
   if (updatedUser.username && !usernameAllowed(updatedUser.username)) {
     throw GQLError(400, "Invalid username");
   }
+  console.log("*******************************88Updating user", ctx.userId, updatedUser);
   const [user] = await db
     .update(UserTable)
     .set({
@@ -57,6 +73,48 @@ export async function handleUpdateUser(
     })
     .where(eq(UserTable.id, ctx.userId))
     .returning({ username: UserTable.username });
+
+  if (updatedUser.trusties && updatedUser.trusties.length > 0) {
+    const trustedUserIds: number[] = [];
+
+    for (const trusty of updatedUser.trusties) {
+      const [existingUser] = await db
+        .select()
+        .from(UserTable)
+        .where(eq(UserTable.email, trusty.email))
+        .limit(1);
+
+      if (existingUser) {
+        trustedUserIds.push(existingUser.id);
+      } else {
+        const [newUser] = await db
+          .insert(UserTable)
+          .values({
+            email: trusty.email,
+            name: trusty.name,
+            emailVerified: false,
+          })
+          .returning({ id: UserTable.id });
+
+        if (newUser) {
+          trustedUserIds.push(newUser.id);
+        }
+      }
+    }
+    await db
+      .insert(TrustedTable)
+      .values({
+        userId: ctx.userId,
+        trustedUserIds: trustedUserIds,
+      })
+      .onConflictDoUpdate({
+        target: [TrustedTable.userId],
+        set:  {
+          trustedUserIds: trustedUserIds,
+        },
+      });
+  }
+
   if (user?.username) {
     revalidateTag(`profile-${user.username}`);
   }

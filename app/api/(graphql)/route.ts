@@ -6,9 +6,10 @@ import {
   ApolloServerPluginLandingPageProductionDefault,
 } from "@apollo/server/plugin/landingPage/default";
 import { startServerAndCreateNextHandler } from "@as-integrations/next";
-// import { UserFieldResolver } from "@graphql/User/fields";
+import { UserFieldResolver } from "@graphql/User/fields";
 import { UserMutationResolver } from "@graphql/User/mutations";
 import { UserQueryResolver } from "@graphql/User/queries";
+import { TrustedQueryResolvers } from "@graphql/Trusted/queries";
 import type { NextRequest } from "next/server";
 import { buildTypeDefsAndResolvers } from "type-graphql";
 
@@ -19,7 +20,8 @@ const { typeDefs, resolvers } = await buildTypeDefsAndResolvers({
   resolvers: [
     UserQueryResolver,
     UserMutationResolver,
-    // UserFieldResolver,
+    UserFieldResolver,
+    TrustedQueryResolvers,
   ],
   authChecker,
   validate: true,

@@ -234,15 +234,29 @@ type Mutation {
 
 type Query {
   getCurrentUser: User
+  getUserTrusties: [Trusted!]!
   isUsernameAvailable(username: String!): Boolean!
   __schema: __Schema!
   __type(name: String!): __Type
+}
+
+type Trusted {
+  email: String!
+  name: String!
+  userId: Float!
+  username: String!
+}
+
+input TrustedContactInput {
+  email: String!
+  name: String!
 }
 
 input UpdateUserInput {
   dob: String
   name: String
   phone: String
+  trusties: [TrustedContactInput!]
   username: String
 }
 

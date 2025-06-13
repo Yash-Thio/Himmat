@@ -18,7 +18,7 @@
     "@apollo/server": "^4.12.2",
     "@as-integrations/next": "^3.2.0",
     "@headlessui/react": "^2.2.4",
-    "@phosphor-icons/react": "^2.1.10",
+    "@phosphor-icons/react": "^2.1.7",
     "@radix-ui/react-checkbox": "^1.3.2",
     "@radix-ui/react-dialog": "^1.1.14",
     "@radix-ui/react-label": "^2.1.7",

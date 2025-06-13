@@ -3,6 +3,7 @@ import {
   boolean,
   date,
   index,
+  integer,
   pgTable,
   serial,
   text,
@@ -17,7 +18,6 @@ export const UserTable = pgTable(
     username: text("username").unique(),
     email: text("email").unique().notNull(),
     emailVerified: boolean("email_verified").default(false),
-    
     password: text("password"),
     phone: text("phone"),
     dob: date("dob"),
@@ -37,5 +37,6 @@ export const UserTable = pgTable(
     usernameIdx: index("username_idx").on(table.username),
   }),
 );
+
 export type UserDBInsert = typeof UserTable.$inferInsert;
 export type UserDB = typeof UserTable.$inferSelect;
