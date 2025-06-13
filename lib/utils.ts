@@ -21,7 +21,7 @@ export const getUsernameInputRules = (
   },
   maxLength: {
     value: USERNAME_MAX_LENGTH,
-    message: "Username can only contain maximum 16 characters",
+    message: `Username can only contain maximum ${USERNAME_MAX_LENGTH} characters`,
   },
   validate: {
     availability: async (username: string) => {

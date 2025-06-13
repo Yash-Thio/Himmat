@@ -100,10 +100,10 @@ function OnboardingWizard({
       },
       {
         title: "Username",
-        heading: "Personalised link",
-        description: "Get a personalized link",
+        heading: "Username Setup",
+        description: "Username Setup",
         longDescription:
-          "Get a personalised sharing link. Select a unique username and get your own custom link that you can share easily!",
+          "Your username should be between 4 and 16 characters long and can include letters (a-z), numbers (0-9), and hyphens (-). Choose something unique and easy to remember.",
         icon: LinkIcon,
         key: 1,
         component: (
@@ -173,7 +173,7 @@ function OnboardingWizard({
         {!loading && (
           <div className="h-full">
             <div className="flex items-center justify-between">
-              <div className="flex gap-4 font-poppins">
+              <div className="flex gap-4">
                 {step > 0 ? (
                   <>
                     <button onClick={prevStep} type="button">
@@ -195,12 +195,12 @@ function OnboardingWizard({
                 key={stepValue.key || stepValue.heading}
               >
                 {stepValue.heading && (
-                  <h2 className="mb-1 mt-6 text-center font-poppins text-3xl font-semibold sm:mt-14">
+                  <h2 className="mb-1 mt-6 text-center text-3xl font-semibold sm:mt-14">
                     {stepValue.heading}
                   </h2>
                 )}
                 {stepValue.longDescription && (
-                  <p className="mb-5 text-center text-gray-600 sm:mb-10">
+                  <p className="mb-5 text-center text-gray-400 sm:mb-10">
                     {stepValue.longDescription}
                   </p>
                 )}

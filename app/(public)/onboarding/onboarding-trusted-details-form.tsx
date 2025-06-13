@@ -81,7 +81,7 @@ export default function OnboardingTrustedDetailsForm({
       <div className="text-center mb-6">
         <UserCircle size={40} className="mx-auto mb-2" />
         <h2 className="text-xl font-semibold">Add Trusted Contacts</h2>
-        <p className="text-sm text-gray-600 mt-1">
+        <p className="text-sm text-gray-400 mt-1">
           Add up to 5 people you trust. They'll be able to help in emergencies.
         </p>
       </div>
