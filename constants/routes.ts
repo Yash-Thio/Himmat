@@ -1,0 +1,21 @@
+export enum Route {
+  Home = "/",
+  Login = "/login",
+  Forgot = "/forgot",
+  SignUp = "/join",
+  Onboarding = "/onboarding",
+  Profile = "/profile",
+  Settings = "/settings",
+  Inbox = "/inbox",
+  Chat = "/chat",
+  PrivacyPolicy = "/privacy-policy",
+  TermsConditions = "/terms-and-conditions",
+}
+
+export function getRoute(route: keyof typeof Route) {
+  return process.env.NEXT_PUBLIC_BASE_URL + Route[route];
+}
+
+export function getMeURL(username: string, clean?: boolean) {
+  return `${clean ? "" : "https://"}${username}.sociocube.me`;
+}

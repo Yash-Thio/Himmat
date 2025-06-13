@@ -1,0 +1,9 @@
+{
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "javascript.updateImportsOnPaste.enabled": true,
+  "eslint.format.enable": true,
+  "eslint.run": "onSave"
+}
