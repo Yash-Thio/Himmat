@@ -18,12 +18,16 @@ type Documents = {
     "\n  #graphql\n  query GetCurrentUser {\n    user: getCurrentUser {\n      id\n      email\n      username\n      name\n      emailVerified\n      isOnboarded\n      phone\n      dob\n    }\n  }\n": typeof types.GetCurrentUserDocument,
     "\n  #graphql\n  query GetDefaultOnboardingDetails {\n    getCurrentUser {\n      id\n      email\n      name\n      phone\n      isOnboarded\n      username\n      dob\n    }\n    trusties: getUserTrusties {\n      name\n      email\n    }\n  }\n": typeof types.GetDefaultOnboardingDetailsDocument,
     "\n  #graphql\n  query IsUsernameAvailable($username: String!) {\n    isUsernameAvailable(username:$username)\n  }\n": typeof types.IsUsernameAvailableDocument,
+    "\n  #graphql\n  query GetChats {\n    chats:getChats {\n      preview{\n          text\n          hasRead\n          at\n      }\n      id\n      user {\n        id\n        username\n        name\n      }\n    }\n  }\n": typeof types.GetChatsDocument,
+    "\n  #graphql\n  query GetChat($username: String!) {\n    chat: getChat(username: $username) {\n      user {\n        id\n        name\n      }\n      id\n      preview{\n          text\n      }\n      messages{\n        body\n        createdAt\n        by\n      }\n    }\n  }\n": typeof types.GetChatDocument,
 };
 const documents: Documents = {
     "\n  #graphql\n  mutation UpdateUser($updatedUser: UpdateUserInput!) {\n    updateUser(updatedUser: $updatedUser)\n  }\n": types.UpdateUserDocument,
     "\n  #graphql\n  query GetCurrentUser {\n    user: getCurrentUser {\n      id\n      email\n      username\n      name\n      emailVerified\n      isOnboarded\n      phone\n      dob\n    }\n  }\n": types.GetCurrentUserDocument,
     "\n  #graphql\n  query GetDefaultOnboardingDetails {\n    getCurrentUser {\n      id\n      email\n      name\n      phone\n      isOnboarded\n      username\n      dob\n    }\n    trusties: getUserTrusties {\n      name\n      email\n    }\n  }\n": types.GetDefaultOnboardingDetailsDocument,
     "\n  #graphql\n  query IsUsernameAvailable($username: String!) {\n    isUsernameAvailable(username:$username)\n  }\n": types.IsUsernameAvailableDocument,
+    "\n  #graphql\n  query GetChats {\n    chats:getChats {\n      preview{\n          text\n          hasRead\n          at\n      }\n      id\n      user {\n        id\n        username\n        name\n      }\n    }\n  }\n": types.GetChatsDocument,
+    "\n  #graphql\n  query GetChat($username: String!) {\n    chat: getChat(username: $username) {\n      user {\n        id\n        name\n      }\n      id\n      preview{\n          text\n      }\n      messages{\n        body\n        createdAt\n        by\n      }\n    }\n  }\n": types.GetChatDocument,
 };
 
 /**
@@ -56,6 +60,14 @@ export function gql(source: "\n  #graphql\n  query GetDefaultOnboardingDetails {
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  #graphql\n  query IsUsernameAvailable($username: String!) {\n    isUsernameAvailable(username:$username)\n  }\n"): (typeof documents)["\n  #graphql\n  query IsUsernameAvailable($username: String!) {\n    isUsernameAvailable(username:$username)\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  #graphql\n  query GetChats {\n    chats:getChats {\n      preview{\n          text\n          hasRead\n          at\n      }\n      id\n      user {\n        id\n        username\n        name\n      }\n    }\n  }\n"): (typeof documents)["\n  #graphql\n  query GetChats {\n    chats:getChats {\n      preview{\n          text\n          hasRead\n          at\n      }\n      id\n      user {\n        id\n        username\n        name\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  #graphql\n  query GetChat($username: String!) {\n    chat: getChat(username: $username) {\n      user {\n        id\n        name\n      }\n      id\n      preview{\n          text\n      }\n      messages{\n        body\n        createdAt\n        by\n      }\n    }\n  }\n"): (typeof documents)["\n  #graphql\n  query GetChat($username: String!) {\n    chat: getChat(username: $username) {\n      user {\n        id\n        name\n      }\n      id\n      preview{\n          text\n      }\n      messages{\n        body\n        createdAt\n        by\n      }\n    }\n  }\n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

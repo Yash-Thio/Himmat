@@ -4,8 +4,8 @@ import Link from "next/link";
 import React, { useMemo } from "react";
 
 import { useUserNavItems } from "@/app/(dashboard)/components/useUserNavItems";
-import Logo from "@/app/logo";
-import { Button } from "@/components/button";
+// import Logo from "@/app/logo";
+import { Button } from "@/components/ui/button";
 import { Variants } from "@/components/constants";
 import LinkWrapper from "@/components/link-wrapper";
 import { getRoute } from "@/constants/routes";
@@ -41,10 +41,13 @@ export default function TopNav({
           {backRoute ? (
             <ArrowLeft size={32} />
           ) : (
-            <Logo className="text-primary" size={32} />
+            // <Logo className="text-primary" size={32} />
+            <h1 className="translate-y-0.5 font-madina text-5xl leading-0">
+              Himmat
+            </h1>
           )}
         </Link>
-        <h2 className="font-poppins line-clamp-1 text-2xl lg:text-3xl lg:pl-0.5 lg:h-10 font-medium text-gray-800">
+        <h2 className="font-poppins line-clamp-1 text-2xl lg:text-3xl lg:pl-0.5 lg:h-10 font-medium">
           {title}
         </h2>
       </div>
@@ -66,7 +69,7 @@ export default function TopNav({
             {page.alwaysIcon && (
               <Button
                 key={page.href}
-                variant={Variants.DARK}
+                variant="secondary"
                 className={"flex gap-2 items-center max-lg:hidden"}
               >
                 {page.navTitle} <page.icon />

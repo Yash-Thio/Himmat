@@ -9,6 +9,9 @@ import { startServerAndCreateNextHandler } from "@as-integrations/next";
 import { UserFieldResolver } from "@graphql/User/fields";
 import { UserMutationResolver } from "@graphql/User/mutations";
 import { UserQueryResolver } from "@graphql/User/queries";
+import { ChatFieldResolvers } from "@graphql/Chat/fields";
+import { ChatMutationResolvers } from "@graphql/Chat/mutations";
+import { ChatQueryResolvers } from "@graphql/Chat/queries";
 import { TrustedQueryResolvers } from "@graphql/Trusted/queries";
 import type { NextRequest } from "next/server";
 import { buildTypeDefsAndResolvers } from "type-graphql";
@@ -21,6 +24,9 @@ const { typeDefs, resolvers } = await buildTypeDefsAndResolvers({
     UserQueryResolver,
     UserMutationResolver,
     UserFieldResolver,
+    ChatQueryResolvers,
+    ChatMutationResolvers,
+    ChatFieldResolvers,
     TrustedQueryResolvers,
   ],
   authChecker,

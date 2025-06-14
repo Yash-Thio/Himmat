@@ -9,51 +9,16 @@ import {
   UserCircle,
 } from "@phosphor-icons/react/dist/ssr";
 
-import { Roles } from "@/__generated__/graphql";
 import { NavItem } from "@/app/(dashboard)/type";
 import { Route } from "@/constants/routes";
 
 export const NAV_ITEMS: NavItem[] = [
   {
-    href: Route.Campaigns,
-    navTitle: "Apply",
-    icon: MoneyWavy,
-    roles: [Roles.Creator],
-  },
-  {
-    icon: ClockCounterClockwise,
-    navTitle: "Applications",
-    href: Route.Applications,
-    parent: Route.Campaigns,
-    roles: [Roles.Creator],
-  },
-  {
-    icon: Handshake,
-    navTitle: "Your Campaigns",
-    href: Route.YourCampaigns,
-    roles: [Roles.Brand, Roles.Agency],
-  },
-  {
-    icon: Handshake,
-    navTitle: "Review Campaigns",
-    href: Route.ReviewCampaigns,
-    roles: [Roles.Admin],
-  },
-  {
-    icon: Plus,
-    navTitle: "New Campaign",
-    href: Route.NewCampaign,
-    alwaysIcon: true,
-    parent: Route.YourCampaigns,
-    roles: [Roles.Brand, Roles.Agency],
+    icon: MagnifyingGlass,
+    navTitle: "Travel",
+    href: Route.Travel,
     requireAuth: true,
     requireOnboarding: true,
-  },
-  {
-    icon: MagnifyingGlass,
-    navTitle: "Search",
-    href: Route.Search,
-    roles: [Roles.Brand, Roles.Agency],
   },
   {
     icon: ChatCircleDots,
@@ -77,3 +42,5 @@ export const NAV_ITEMS: NavItem[] = [
     requireAuth: true,
   },
 ];
+
+export const WRAPPER_ID = "dashboard-wrapper-container";

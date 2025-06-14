@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React, { useMemo } from "react";
 
-import Logo from "@/app/logo";
+// import Logo from "@/app/logo";
 import { getRoute, Route } from "@/constants/routes";
 import { useToken, useUser } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
@@ -32,11 +32,11 @@ export default function SideNav({
         href={Route.Home}
         key={Route.Home}
       >
-        <Logo size={36} />
+        {/* <Logo size={36} /> */}
 
         {!collapse && (
           <h1 className="translate-y-0.5 font-madina text-5xl leading-0">
-            sociocube
+            Himmat
           </h1>
         )}
       </Link>

@@ -4,8 +4,7 @@ import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 import { GetChatsQuery } from "@/__generated__/graphql";
-import { Button } from "@/components/button";
-import { Variants } from "@/components/constants";
+import { Button } from "@/components/ui/button";
 import UserImage from "@/components/user-image";
 import { getRoute } from "@/constants/routes";
 import { cn } from "@/lib/utils";
@@ -72,7 +71,7 @@ export default function ChatList({ chats }: { chats: GetChatsQuery["chats"] }) {
               Start a campaign or find creators to connect directly
             </p>
             <Link href={getRoute("Search")}>
-              <Button variant={Variants.ACCENT}>Find Creators</Button>
+              <Button variant="destructive">Find Creators</Button>
             </Link>
           </div>
         )}

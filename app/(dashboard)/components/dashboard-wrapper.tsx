@@ -6,7 +6,7 @@ import SideNav from "@/app/(dashboard)/components/side-nav";
 import TopNav from "@/app/(dashboard)/components/top-nav";
 import { cn } from "@/lib/utils";
 
-import { WRAPPER_ID } from "../campaigns/constants";
+import { WRAPPER_ID } from "../constants";
 
 export default function DashboardWrapper({
   children,

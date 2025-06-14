@@ -41,3 +41,43 @@ export const IS_USERNAME_AVAILABLE = gql(`
     isUsernameAvailable(username:$username)
   }
 `);
+
+export const GET_CHATS = gql(`
+  #graphql
+  query GetChats {
+    chats:getChats {
+      preview{
+          text
+          hasRead
+          at
+      }
+      id
+      user {
+        id
+        username
+        name
+      }
+    }
+  }
+`);
+
+export const GET_CHAT = gql(`
+  #graphql
+  query GetChat($username: String!) {
+    chat: getChat(username: $username) {
+      user {
+        id
+        name
+      }
+      id
+      preview{
+          text
+      }
+      messages{
+        body
+        createdAt
+        by
+      }
+    }
+  }
+`);

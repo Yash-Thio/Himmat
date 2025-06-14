@@ -228,11 +228,34 @@ schema {
   mutation: Mutation
 }
 
+type Conversation {
+  id: Float!
+  messages(page: Float): [Message!]!
+  preview: Preview
+  user: User
+}
+
+type Message {
+  body: String!
+  by: Float!
+  createdAt: Float!
+}
+
 type Mutation {
+  readMessage(conversationID: Int!): Boolean!
+  sendMessage(body: String!, userID: Int!): Boolean!
   updateUser(updatedUser: UpdateUserInput!): Boolean!
 }
 
+type Preview {
+  at: Float!
+  hasRead: Boolean!
+  text: String!
+}
+
 type Query {
+  getChat(username: String!): Conversation
+  getChats: [Conversation!]!
   getCurrentUser: User
   getUserTrusties: [Trusted!]!
   isUsernameAvailable(username: String!): Boolean!
