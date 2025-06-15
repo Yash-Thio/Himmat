@@ -94,8 +94,7 @@ export type Trusted = {
 };
 
 export type TrustedContactInput = {
-  email: Scalars['String']['input'];
-  name: Scalars['String']['input'];
+  username: Scalars['String']['input'];
 };
 
 export type UpdateUserInput = {

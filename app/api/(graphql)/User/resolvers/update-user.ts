@@ -23,12 +23,9 @@ import { USERNAME_REGEX } from "@/constants/regex";
 @InputType("TrustedContactInput")
 export class TrustedContactInput {
   @Field()
-  @IsEmail()
-  email!: string;
-
-  @Field()
-  @MaxLength(NAME_MAX_LENGTH)
-  name!: string;
+  @Matches(USERNAME_REGEX)
+  @MaxLength(USERNAME_MAX_LENGTH)
+  username!: string;
 }
 
 @InputType("UpdateUserInput")
@@ -80,38 +77,27 @@ export async function handleUpdateUser(
       const [existingUser] = await db
         .select()
         .from(UserTable)
-        .where(eq(UserTable.email, trusty.email))
+        .where(eq(UserTable.username, trusty.username))
         .limit(1);
 
       if (existingUser) {
         trustedUserIds.push(existingUser.id);
-      } else {
-        const [newUser] = await db
-          .insert(UserTable)
-          .values({
-            email: trusty.email,
-            name: trusty.name,
-            emailVerified: false,
-          })
-          .returning({ id: UserTable.id });
-
-        if (newUser) {
-          trustedUserIds.push(newUser.id);
-        }
       }
     }
-    await db
-      .insert(TrustedTable)
-      .values({
-        userId: ctx.userId,
-        trustedUserIds: trustedUserIds,
-      })
-      .onConflictDoUpdate({
-        target: [TrustedTable.userId],
-        set:  {
+    if (trustedUserIds.length > 0) {
+      await db
+        .insert(TrustedTable)
+        .values({
+          userId: ctx.userId,
           trustedUserIds: trustedUserIds,
-        },
-      });
+        })
+        .onConflictDoUpdate({
+          target: [TrustedTable.userId],
+          set: {
+            trustedUserIds: trustedUserIds,
+          },
+        });
+    }
   }
 
   if (user?.username) {

@@ -271,8 +271,7 @@ type Trusted {
 }
 
 input TrustedContactInput {
-  email: String!
-  name: String!
+  username: String!
 }
 
 input UpdateUserInput {

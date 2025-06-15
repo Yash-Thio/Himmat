@@ -71,7 +71,6 @@ export default function OnboardingUsername({
           const result = await isUsernameAvailable({ username });
           return Boolean(result.data?.isUsernameAvailable);
         })}
-        suffix=".sociocube.me"
         maxLength={USERNAME_MAX_LENGTH}
         minLength={USERNAME_MIN_LENGTH}
       />

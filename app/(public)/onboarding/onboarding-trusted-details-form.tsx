@@ -7,14 +7,19 @@ import { useFieldArray, useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import Form from "@/components/form";
 import { Input } from "@/components/input";
-import { NAME_MAX_LENGTH } from "@/constants/constraints";
 import { handleGQLErrors, useAuthMutation } from "@/lib/apollo-client";
 import { useUser } from "@/lib/auth-client";
 import { UPDATE_USER } from "@/lib/mutations";
+import { IS_USERNAME_AVAILABLE } from "@/lib/queries";
+import { getUsernameInputRules } from "@/lib/utils";
+import {
+  USERNAME_MAX_LENGTH,
+  USERNAME_MIN_LENGTH,
+} from "@/constants/constraints";
+import { useAuthQuery } from "@/lib/apollo-client";
 
 interface TrustedContact {
-  name: string;
-  email: string;
+  username: string;
 }
 
 interface FormFields {
@@ -31,12 +36,15 @@ export default function OnboardingTrustedDetailsForm({
   fallbackToStep: () => void;
 }) {
   const [user, setUser] = useUser();
+  const [isUsernameAvailable, { loading: loadingAvailability }] = useAuthQuery(
+    IS_USERNAME_AVAILABLE
+  );
   const form = useForm<FormFields>({
     defaultValues: {
       trusties:
         defaultValues.trusties.length > 0
           ? defaultValues.trusties
-          : [{ name: "", email: "" }],
+          : [{ username: "" }],
     },
   });
   const { fields, append, remove } = useFieldArray({
@@ -45,8 +53,8 @@ export default function OnboardingTrustedDetailsForm({
   });
   const [updateTrustedDetails, { loading }] = useAuthMutation(UPDATE_USER);
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
-    const validTrusties = data.trusties.filter(
-      (trusty) => trusty.name.trim() && trusty.email.trim()
+    const validTrusties = data.trusties.filter((trusty) =>
+      trusty.username.trim()
     );
 
     if (validTrusties.length === 0) {
@@ -67,7 +75,7 @@ export default function OnboardingTrustedDetailsForm({
   };
   const addTrustedContact = () => {
     if (fields.length < 5) {
-      append({ name: "", email: "" });
+      append({ username: "" });
     }
   };
 
@@ -108,33 +116,23 @@ export default function OnboardingTrustedDetailsForm({
                 </Button>
               )}
             </div>
-
             <Input
-              label="Full Name"
-              name={`trusties.${index}.name`}
-              placeholder="Enter full name"
-              rules={{
-                required: "Name is required",
-                maxLength: {
-                  value: NAME_MAX_LENGTH,
-                  message: `Name cannot exceed ${NAME_MAX_LENGTH} characters`,
-                },
+              className="block"
+              label="Username"
+              name={`trusties.${index}.username`}
+              onChange={() => {
+                form.clearErrors();
               }}
-              maxLength={NAME_MAX_LENGTH}
-            />
-
-            <Input
-              label="Email Address"
-              name={`trusties.${index}.email`}
-              placeholder="Enter email address"
-              type="email"
-              rules={{
-                required: "Email is required",
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: "Please enter a valid email address",
-                },
-              }}
+              placeholder="Enter username"
+              rules={getUsernameInputRules(async (username: string) => {
+                const result = await isUsernameAvailable({ username });
+                return (
+                  !Boolean(result.data?.isUsernameAvailable) &&
+                  user?.username !== username
+                );
+              })}
+              maxLength={USERNAME_MAX_LENGTH}
+              minLength={USERNAME_MIN_LENGTH}
             />
           </div>
         ))}
