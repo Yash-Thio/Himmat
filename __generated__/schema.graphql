@@ -243,7 +243,10 @@ type Message {
 
 type Mutation {
   readMessage(conversationID: Int!): Boolean!
+  resetPassword(newPassword: String!, token: String!): Boolean!
   sendMessage(body: String!, userID: Int!): Boolean!
+  sendResetPasswordEmail(email: String!): Boolean
+  sendVerificationEmail: Boolean!
   updateUser(updatedUser: UpdateUserInput!): Boolean!
 }
 
@@ -259,6 +262,7 @@ type Query {
   getCurrentUser: User
   getUserTrusties: [Trusted!]!
   isUsernameAvailable(username: String!): Boolean!
+  verifyEmail(token: String!): Boolean!
   __schema: __Schema!
   __type(name: String!): __Type
 }

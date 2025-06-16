@@ -39,7 +39,7 @@ export default function DashboardWrapper({
           <div
             id={WRAPPER_ID}
             className={cn(
-              "h-full min-h-0 w-full  overflow-auto snap-y snap-mandatory snap-always",
+              "h-full min-h-0 w-full  overflow-auto snap-y snap-mandatory snap-always no-scrollbar",
               noPadding ? "" : "px-4 lg:px-8",
             )}
           >

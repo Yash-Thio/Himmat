@@ -29,8 +29,7 @@ export const GET_DEFAULT_ONBOARDING_DETAILS = gql(`
       dob
     }
     trusties: getUserTrusties {
-      name
-      email
+      username
     }
   }
 `);
@@ -79,5 +78,23 @@ export const GET_CHAT = gql(`
         by
       }
     }
+  }
+`);
+
+export const GET_USER_TRUSTED_DETAILS = gql(`
+  #graphql
+  query GetUserTrusties {
+    trusties: getUserTrusties {
+      name
+      email
+      username
+    }
+  }
+`);
+
+export const VERIFY_EMAIL = gql(`
+  #graphql
+  query VerifyEmail($token:String!) {
+    verifyEmail(token: $token)
   }
 `);

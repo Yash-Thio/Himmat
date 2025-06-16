@@ -27,7 +27,7 @@ export default function AuthLayout({
       </div>
 
       <div className="sm:mx-auto sm:mt-12 sm:w-full sm:max-w-[480px] mt-4">
-        <div className=" px-4 sm:rounded-lg sm:bg-primary-foreground sm:px-8 py-8 sm:shadow-sm">
+        <div className=" px-4 sm:rounded-lg sm:bg-card sm:px-8 py-8 sm:shadow-sm">
           {children}
           {redirectURL ? (
             <>

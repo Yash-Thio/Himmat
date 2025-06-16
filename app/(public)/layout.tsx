@@ -9,7 +9,7 @@ import { Navbar } from "@/components/navbar";
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
-    <main className="pt-24 min-h-svh flex flex-col">
+    <main className="pt-24 min-h-svh flex flex-col no-scrollbar ">
       <Suspense fallback={<Navbar {...UNAUTHORISED_NAVBAR_SECTIONS} />}>
         <OptimisticNavbar />
       </Suspense>

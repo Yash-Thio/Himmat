@@ -26,7 +26,7 @@ export default function SideNav({
     [all, primaryKey],
   );
   return (
-    <ul className="space-y-1 shrink-0 border-r border-gray-200 px-3 max-lg:hidden ">
+    <ul className="space-y-1 shrink-0 border-r border-gray-800 px-3 bg-card max-lg:hidden ">
       <Link
         className="my-7 pl-2 gap-2 flex items-center text-primary"
         href={Route.Home}
@@ -44,8 +44,8 @@ export default function SideNav({
         <React.Fragment key={item.href}>
           <Link
             className={cn(
-              "flex gap-2.5 items-center py-3 hover:bg-gray-100 rounded-lg",
-              activeKey === item.href && "bg-gray-100 text-primary",
+              "flex gap-2.5 items-center py-3 hover:bg-primary-foreground rounded-lg",
+              activeKey === item.href && "bg-secondary text-primary",
               collapse ? "px-3" : "pl-3 pr-14",
             )}
             href={
@@ -69,8 +69,8 @@ export default function SideNav({
             ? subLinks.map((page) => (
                 <Link
                   className={cn(
-                    "flex gap-2.5 items-center py-3 hover:bg-gray-100 rounded-lg",
-                    activeKey === page.href && "bg-gray-100 text-primary",
+                    "flex gap-2.5 items-center py-3 hover:bg-primary-foreground rounded-lg",
+                    activeKey === page.href && "bg-secondary text-primary",
                     collapse ? "px-3 justify-center" : "pl-7",
                   )}
                   href={

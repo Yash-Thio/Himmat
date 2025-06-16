@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
-    <html className="scroll-smooth" lang="en">
+    <html className="scroll-smooth no-scrollbar" lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} flex flex-col`}
       >

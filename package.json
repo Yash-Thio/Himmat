@@ -52,6 +52,7 @@
     "react-hot-toast": "^2.4.1",
     "react-window": "^1.8.11",
     "reflect-metadata": "^0.2.2",
+    "resend": "^4.6.0",
     "tailwind-merge": "^3.3.0",
     "type-graphql": "2.0.0-rc.2",
     "uuid": "^11.1.0",

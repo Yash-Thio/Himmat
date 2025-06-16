@@ -19,7 +19,7 @@ export default async function AllChatPage({ children }: PropsWithChildren) {
     >
       <div
         className={
-          "grid grid-cols-1 lg:grid-cols-3 min-h-full h-full border-t border-gray-200 overflow-hidden"
+          "grid grid-cols-1 lg:grid-cols-3 min-h-full h-full border-t border-gray-800 overflow-hidden"
         }
       >
         <ChatList chats={chats} />

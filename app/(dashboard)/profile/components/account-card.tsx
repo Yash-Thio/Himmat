@@ -17,16 +17,16 @@ export default function AccountCard({
   return (
     <section
       className={cn(
-        "shadow-md rounded-xl mb-5 p-5 border border-gray-200",
+        "shadow-md rounded-xl mb-5 p-5 border bg-card",
         className,
       )}
     >
       <div className="flex justify-between items-start">
         <div>
           {title && (
-            <h2 className="text-xl font-poppins font-medium">{title}</h2>
+            <h2 className="text-xl font-medium">{title}</h2>
           )}
-          {subtitle && <p className="text-sm text-gray-500 mb-4">{subtitle}</p>}
+          {subtitle && <p className="text-sm mb-4">{subtitle}</p>}
         </div>
         {cta && cta}
       </div>

@@ -15,8 +15,8 @@ export default function Page() {
         width={500}
         className=""
       />
-      <p className="mx-auto mt-4 sm:mt-6 max-w-2xl text-lg leading-8 text-gray-600">
-        Open a chat to connect with potential collaborators.
+      <p className="mx-auto mt-4 sm:mt-6 max-w-2xl text-lg leading-8">
+        Open a chat to view messages.
       </p>
     </div>
   );

@@ -15,7 +15,7 @@ export default function BottomNav({ activeKey }: { activeKey: string }) {
   const primaryKey =
     all.find((item) => item.href === activeKey)?.parent || activeKey;
   return (
-    <div className="flex items-center justify-around border-t bg-background border-gray-200 py-3 px-7 gap-4 shadow-xl lg:hidden fixed bottom-0 w-full">
+    <div className="flex items-center justify-around border-t bg-primary-foreground border-gray-800 py-3 px-7 gap-4 shadow-xl lg:hidden fixed bottom-0 w-full">
       {primary.map((item) => (
         <Link
           className={cn(
