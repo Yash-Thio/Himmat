@@ -8,31 +8,31 @@ const timeline = [
     name: "Create Your Free Account",
     image: "/how-it-works-1.svg",
     description:
-      "Sign up in seconds as a brand or creator — no approvals or minimum requirements.",
+      "Sign up in seconds — no approvals or credit card information required.",
   },
   {
-    name: "Launch or Explore Campaigns",
+    name: "Get On Board ",
     image: "/how-it-works-2.svg",
     description:
-      "Brands post campaigns using AI assistance. Creators browse active campaigns and apply instantly.",
+      "Seamlesly add details of your emergency contacts.",
   },
   {
-    name: "Match & Collaborate",
+    name: "Search Your Destination",
     image: "/how-it-works-3.svg",
     description:
-      "Creators get selected based on fit. Brands view detailed profiles and communicate directly — no gatekeeping.",
+      "Search for your destination and find the safest routes possible.",
   },
   {
-    name: "Get Content. Get Paid. Grow Together.",
+    name: "Travel Safe.",
     image: "/how-it-works-4.svg",
     description:
-      "Creators deliver content, brands review it, and both sides grow through authentic partnerships and ratings.",
+      "Travel safely knowing your trusted contacts are just a tap away.",
   },
 ];
 export default function HowItWorks() {
   return (
     <SectionWrapper
-      description="Himmat makes it effortless for brands and content creators to discover each other, launch campaigns, and collaborate — all in one place. No middlemen. No guesswork."
+      description="Himmat makes it effortless for users to connect with help during emergencies and find the safest route possible."
       id="how-it-works"
       prefixTitle="Safety is not a choice — it&apos;s a route."
       title="How Himmat Works"

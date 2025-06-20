@@ -15,7 +15,7 @@ export default function SettingsPage() {
     >
       <div className="divide-y">
         <button
-          className="py-3 px-4 text-start text-xl hover:bg-gray-100 w-full rounded-xl flex items-center gap-2"
+          className="py-3 px-4 text-start text-xl hover:bg-primary-foreground w-full rounded-xl flex items-center gap-2"
           onClick={logout}
         >
           <SignOut size={24} />

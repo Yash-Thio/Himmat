@@ -58,7 +58,7 @@ export default function Features() {
   return (
     <SectionWrapper
       center
-      description="Explore our powerful features designed to make collaboration effortless."
+      description="Explore our powerful features designed to make solo travel safe."
       id="features"
       prefixTitle="Key Features"
       title="Everything You Need For A Safe Journey"

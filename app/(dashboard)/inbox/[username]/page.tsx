@@ -24,7 +24,7 @@ export default async function Page({ params }: ChatPage) {
     0,
   );
   if (!chat) return notFound();
-  const photo = chat.user?.photo;
+  // const photo = chat.user?.photo;
   const name = chat.user?.name;
   return (
     <div
@@ -32,7 +32,7 @@ export default async function Page({ params }: ChatPage) {
         "lg:col-span-2 max-lg:h-[calc(100svh-55px)] h-screen flex flex-col overflow-hidden"
       }
     >
-      <div className="flex gap-3 items-center py-3 px-3 lg:px-6 border-b border-gray-200 flex-shrink-0">
+      <div className="flex gap-3 items-center py-3 px-3 lg:px-6 border-b border-gray-800 flex-shrink-0">
         <Link className={"lg:hidden"} href={getRoute("Inbox")}>
           <CaretLeft size={26} />
         </Link>
@@ -40,13 +40,13 @@ export default async function Page({ params }: ChatPage) {
         <UserImage
           className={"lg:hidden"}
           size={40}
-          photo={photo}
+          // photo={photo}
           alt={name || ""}
         />
         <UserImage
           className={"max-lg:hidden"}
           size={48}
-          photo={photo}
+          // photo={photo}
           alt={name || ""}
         />
         <h2 className={"font-semibold text-lg"}>{name}</h2>
