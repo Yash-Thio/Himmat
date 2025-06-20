@@ -246,6 +246,7 @@ type Mutation {
   resetPassword(newPassword: String!, token: String!): Boolean!
   sendMessage(body: String!, userID: Int!): Boolean!
   sendResetPasswordEmail(email: String!): Boolean
+  sendSos: Boolean!
   sendVerificationEmail: Boolean!
   updateUser(updatedUser: UpdateUserInput!): Boolean!
 }

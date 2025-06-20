@@ -5,10 +5,12 @@ import { EmailComponent } from "@backend/lib/email/types";
 import { sendEmail } from "./driver";
 import { ResetPassword } from "./template/reset-password";
 import { VerifyEmail } from "./template/verify";
+import { SosAlert } from "./template/sos-alert";
 
 export const Template = {
   VerifyEmail,
   ResetPassword,
+  SosAlert,
 };
 
 export function sendTemplateEmail<T extends keyof typeof Template>(

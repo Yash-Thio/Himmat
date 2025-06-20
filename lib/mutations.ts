@@ -42,3 +42,10 @@ export const RESET_PASSWORD = gql(`
     resetPassword(newPassword: $newPassword, token:$token)  
   }
 `);
+
+export const SEND_SOS = gql(`
+  #graphql
+  mutation SendSOS {
+    sendSos
+  }
+`);

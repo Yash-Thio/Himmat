@@ -15,6 +15,7 @@ import { ChatQueryResolvers } from "@graphql/Chat/queries";
 import { RequestMutationResolver } from "@graphql/Request/mutations";
 import { RequestQueryResolver } from "@graphql/Request/queries";
 import { TrustedQueryResolvers } from "@graphql/Trusted/queries";
+import { SosMutationResolvers } from "@graphql/Sos/mutations";
 import type { NextRequest } from "next/server";
 import { buildTypeDefsAndResolvers } from "type-graphql";
 
@@ -32,6 +33,7 @@ const { typeDefs, resolvers } = await buildTypeDefsAndResolvers({
     RequestQueryResolver,
     RequestMutationResolver,
     TrustedQueryResolvers,
+    SosMutationResolvers,
   ],
   authChecker,
   validate: true,

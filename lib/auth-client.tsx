@@ -22,9 +22,13 @@ const GlobalState = createContext<{
   setToken: Dispatch<SetStateAction<string | null | undefined>>;
   user?: CurrentUser;
   setUser: Dispatch<SetStateAction<CurrentUser>>;
+  isSosActive: boolean;
+  setIsSosActive: Dispatch<SetStateAction<boolean>>;
 }>({
   setToken: () => null,
   setUser: () => null,
+  isSosActive: false,
+  setIsSosActive: () => null,
 });
 
 export function useUser() {
@@ -41,9 +45,22 @@ export function useSetToken() {
   return setToken;
 }
 
+export function useSos() {
+  const { isSosActive, setIsSosActive } = useContext(GlobalState);
+  return [isSosActive, setIsSosActive] as const;
+}
+
 export function GlobalStateWrapper({ children }: PropsWithChildren) {
   const [token, setToken] = useState<string | null>();
   const [user, setUser] = useState<CurrentUser>();
+  const [isSosActive, setIsSosActive] = useState(false);
+
+  useEffect(() => {
+    const sosActive = localStorage.getItem('sos_active');
+    if (sosActive === 'true') {
+      setIsSosActive(true);
+    }
+  }, []);
   useEffect(() => {
     if (process.env.NODE_ENV === "production") {
       // eslint-disable-next-line -- Message for public
@@ -59,6 +76,8 @@ export function GlobalStateWrapper({ children }: PropsWithChildren) {
         setUser,
         token,
         setToken,
+        isSosActive,
+        setIsSosActive,
       }}
     >
       <Suspense>

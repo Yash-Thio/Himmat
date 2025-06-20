@@ -20,6 +20,7 @@ type Documents = {
     "\n  #graphql\n  mutation SendResetPasswordEmail($email:String!) {\n    sendResetPasswordEmail(email: $email)  \n  }\n": typeof types.SendResetPasswordEmailDocument,
     "\n  #graphql\n  mutation SendVerificationEmail {\n    sendVerificationEmail\n  }\n": typeof types.SendVerificationEmailDocument,
     "\n  #graphql\n  mutation ResetPassword($newPassword:String!, $token:String!) {\n    resetPassword(newPassword: $newPassword, token:$token)  \n  }\n": typeof types.ResetPasswordDocument,
+    "\n  #graphql\n  mutation SendSOS {\n    sendSos\n  }\n": typeof types.SendSosDocument,
     "\n  #graphql\n  query GetCurrentUser {\n    user: getCurrentUser {\n      id\n      email\n      username\n      name\n      emailVerified\n      isOnboarded\n      phone\n      dob\n    }\n  }\n": typeof types.GetCurrentUserDocument,
     "\n  #graphql\n  query GetDefaultOnboardingDetails {\n    getCurrentUser {\n      id\n      email\n      name\n      phone\n      isOnboarded\n      username\n      dob\n    }\n    trusties: getUserTrusties {\n      username\n    }\n  }\n": typeof types.GetDefaultOnboardingDetailsDocument,
     "\n  #graphql\n  query IsUsernameAvailable($username: String!) {\n    isUsernameAvailable(username:$username)\n  }\n": typeof types.IsUsernameAvailableDocument,
@@ -35,6 +36,7 @@ const documents: Documents = {
     "\n  #graphql\n  mutation SendResetPasswordEmail($email:String!) {\n    sendResetPasswordEmail(email: $email)  \n  }\n": types.SendResetPasswordEmailDocument,
     "\n  #graphql\n  mutation SendVerificationEmail {\n    sendVerificationEmail\n  }\n": types.SendVerificationEmailDocument,
     "\n  #graphql\n  mutation ResetPassword($newPassword:String!, $token:String!) {\n    resetPassword(newPassword: $newPassword, token:$token)  \n  }\n": types.ResetPasswordDocument,
+    "\n  #graphql\n  mutation SendSOS {\n    sendSos\n  }\n": types.SendSosDocument,
     "\n  #graphql\n  query GetCurrentUser {\n    user: getCurrentUser {\n      id\n      email\n      username\n      name\n      emailVerified\n      isOnboarded\n      phone\n      dob\n    }\n  }\n": types.GetCurrentUserDocument,
     "\n  #graphql\n  query GetDefaultOnboardingDetails {\n    getCurrentUser {\n      id\n      email\n      name\n      phone\n      isOnboarded\n      username\n      dob\n    }\n    trusties: getUserTrusties {\n      username\n    }\n  }\n": types.GetDefaultOnboardingDetailsDocument,
     "\n  #graphql\n  query IsUsernameAvailable($username: String!) {\n    isUsernameAvailable(username:$username)\n  }\n": types.IsUsernameAvailableDocument,
@@ -82,6 +84,10 @@ export function gql(source: "\n  #graphql\n  mutation SendVerificationEmail {\n 
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  #graphql\n  mutation ResetPassword($newPassword:String!, $token:String!) {\n    resetPassword(newPassword: $newPassword, token:$token)  \n  }\n"): (typeof documents)["\n  #graphql\n  mutation ResetPassword($newPassword:String!, $token:String!) {\n    resetPassword(newPassword: $newPassword, token:$token)  \n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  #graphql\n  mutation SendSOS {\n    sendSos\n  }\n"): (typeof documents)["\n  #graphql\n  mutation SendSOS {\n    sendSos\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

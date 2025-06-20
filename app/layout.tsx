@@ -14,6 +14,7 @@ import { GET_CURRENT_USER } from "@/lib/queries";
 
 import AuthApply from "./(public)/components/auth/auth-apply";
 import TokenApply from "./(public)/components/auth/token-apply";
+import SOSButton from "./(dashboard)/components/sos-button";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -59,6 +60,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
               Component={TokenApply}
             />
             {children}
+            <SOSButton />
           </GlobalStateWrapper>
         </ApolloWrapper>
       </body>
