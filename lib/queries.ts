@@ -92,6 +92,13 @@ export const GET_USER_TRUSTED_DETAILS = gql(`
   }
 `);
 
+export const GET_IS_USER_TRUSTED = gql(`
+  #graphql
+  query GetIsUserTrusted($username: String!) {
+    getIsUserTrusted(username: $username)
+  }
+`);
+
 export const VERIFY_EMAIL = gql(`
   #graphql
   query VerifyEmail($token:String!) {

@@ -261,6 +261,7 @@ type Query {
   getChat(username: String!): Conversation
   getChats: [Conversation!]!
   getCurrentUser: User
+  getIsUserTrusted(username: String!): Boolean!
   getUserTrusties: [Trusted!]!
   isUsernameAvailable(username: String!): Boolean!
   verifyEmail(token: String!): Boolean!

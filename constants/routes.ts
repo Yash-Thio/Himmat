@@ -11,6 +11,7 @@ export enum Route {
   Travel = "/travel",
   PrivacyPolicy = "/privacy-policy",
   TermsConditions = "/terms-and-conditions",
+  Sos = "/sos",
 }
 
 export function getRoute(route: keyof typeof Route) {

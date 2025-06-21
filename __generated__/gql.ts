@@ -27,6 +27,7 @@ type Documents = {
     "\n  #graphql\n  query GetChats {\n    chats:getChats {\n      preview{\n          text\n          hasRead\n          at\n      }\n      id\n      user {\n        id\n        username\n        name\n      }\n    }\n  }\n": typeof types.GetChatsDocument,
     "\n  #graphql\n  query GetChat($username: String!) {\n    chat: getChat(username: $username) {\n      user {\n        id\n        name\n      }\n      id\n      preview{\n          text\n      }\n      messages{\n        body\n        createdAt\n        by\n      }\n    }\n  }\n": typeof types.GetChatDocument,
     "\n  #graphql\n  query GetUserTrusties {\n    trusties: getUserTrusties {\n      name\n      email\n      username\n    }\n  }\n": typeof types.GetUserTrustiesDocument,
+    "\n  #graphql\n  query GetIsUserTrusted($username: String!) {\n    getIsUserTrusted(username: $username)\n  }\n": typeof types.GetIsUserTrustedDocument,
     "\n  #graphql\n  query VerifyEmail($token:String!) {\n    verifyEmail(token: $token)\n  }\n": typeof types.VerifyEmailDocument,
 };
 const documents: Documents = {
@@ -43,6 +44,7 @@ const documents: Documents = {
     "\n  #graphql\n  query GetChats {\n    chats:getChats {\n      preview{\n          text\n          hasRead\n          at\n      }\n      id\n      user {\n        id\n        username\n        name\n      }\n    }\n  }\n": types.GetChatsDocument,
     "\n  #graphql\n  query GetChat($username: String!) {\n    chat: getChat(username: $username) {\n      user {\n        id\n        name\n      }\n      id\n      preview{\n          text\n      }\n      messages{\n        body\n        createdAt\n        by\n      }\n    }\n  }\n": types.GetChatDocument,
     "\n  #graphql\n  query GetUserTrusties {\n    trusties: getUserTrusties {\n      name\n      email\n      username\n    }\n  }\n": types.GetUserTrustiesDocument,
+    "\n  #graphql\n  query GetIsUserTrusted($username: String!) {\n    getIsUserTrusted(username: $username)\n  }\n": types.GetIsUserTrustedDocument,
     "\n  #graphql\n  query VerifyEmail($token:String!) {\n    verifyEmail(token: $token)\n  }\n": types.VerifyEmailDocument,
 };
 
@@ -112,6 +114,10 @@ export function gql(source: "\n  #graphql\n  query GetChat($username: String!) {
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  #graphql\n  query GetUserTrusties {\n    trusties: getUserTrusties {\n      name\n      email\n      username\n    }\n  }\n"): (typeof documents)["\n  #graphql\n  query GetUserTrusties {\n    trusties: getUserTrusties {\n      name\n      email\n      username\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  #graphql\n  query GetIsUserTrusted($username: String!) {\n    getIsUserTrusted(username: $username)\n  }\n"): (typeof documents)["\n  #graphql\n  query GetIsUserTrusted($username: String!) {\n    getIsUserTrusted(username: $username)\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
