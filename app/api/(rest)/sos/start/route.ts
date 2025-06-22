@@ -4,6 +4,7 @@ import { getSosChannelName, SOS_LOCATION_UPDATE } from '../utils';
 import { UserTable } from '../../../(graphql)/User/db';
 import { db } from '../../../lib/db';
 import { eq } from 'drizzle-orm';
+import type { locationUpdate } from '../types';
 
 export async function POST(request: NextRequest) {
   try {
@@ -23,19 +24,21 @@ export async function POST(request: NextRequest) {
     }
 
     const { latitude, longitude, accuracy, timestamp } = await request.json();
-
+    if(!user.username) {
+      console.error('User username not found');
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 404 });
+    }
+    console.log('**********************SOS location update:', { latitude, longitude, accuracy, timestamp });
+    const locationData: locationUpdate = {
+      latitude,
+      longitude,
+      accuracy,
+      timestamp,
+    };
     await sendEvent([{
-      channel: getSosChannelName(user.id),
+      channel: getSosChannelName(user.username),
       name: SOS_LOCATION_UPDATE,
-      data: {
-        latitude,
-        longitude,
-        accuracy,
-        timestamp,
-        userId: user.id,
-        username: user.username,
-        name: user.name,
-      },
+      data: locationData,
     }]);
 
     return NextResponse.json({ success: true });

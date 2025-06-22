@@ -6,6 +6,7 @@ import DashboardWrapper from "../../components/dashboard-wrapper";
 import { GET_CURRENT_USER, GET_IS_USER_TRUSTED } from "@/lib/queries";
 import { queryGQL } from "@/lib/apollo-server";
 import { Injector } from "@/lib/apollo-server";
+import DisplayLocation from "./components/display-location";
 
 interface SosPage {
   params: Promise<{ username: string }>;
@@ -30,11 +31,12 @@ export default async function Page({ params }: SosPage) {
               0
             )
           }
-          Component={({ data }) => (
+          Component={async ({ data }) => (
             data?.getIsUserTrusted ? (
-              <div className="text-center text-green-500">
-                You are a trusted contact for this user.
-              </div>
+              <DisplayLocation
+                isTrusted={data}
+                username={(await params).username}
+              />
             ) : (
               <div className="text-center text-red-500">
                 You are not a trusted contact for this user.

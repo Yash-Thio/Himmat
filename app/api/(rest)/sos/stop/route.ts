@@ -22,8 +22,12 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 404 });
     }
 
+    if(!user.username) {
+      console.error('User username not found');
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 404 });
+    }
     await sendEvent([{
-      channel: getSosChannelName(user.id),
+      channel: getSosChannelName(user.username),
       name: SOS_STOPPED,
       data: {
         userId: user.id,
