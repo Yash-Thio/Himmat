@@ -1,5 +1,5 @@
 "use client";
-import { Plus, Trash, Users } from "@phosphor-icons/react";
+import { Plus, Trash, Users, ChatCircleDotsIcon } from "@phosphor-icons/react";
 import React, { useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useFieldArray, useForm } from "react-hook-form";
@@ -8,6 +8,8 @@ import type { GetUserTrustiesQuery } from "@/__generated__/graphql";
 import Form from "@/components/form";
 import { Input } from "@/components/input";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { getRoute } from "@/constants/routes";
 import {
   USERNAME_MAX_LENGTH,
   USERNAME_MIN_LENGTH,
@@ -41,7 +43,7 @@ export default function TrustiesSection({
   const [isEditing, setIsEditing] = useState(false);
   const [updateUser, { loading: updateLoading }] = useAuthMutation(UPDATE_USER);
   const [isUsernameAvailable, { loading: loadingAvailability }] = useAuthQuery(
-    IS_USERNAME_AVAILABLE,
+    IS_USERNAME_AVAILABLE
   );
   const trusties = data?.trusties || [];
 
@@ -61,7 +63,7 @@ export default function TrustiesSection({
 
   const onSubmit: SubmitHandler<FormFields> = (data) => {
     const validTrusties = data.trusties.filter((trusty) =>
-      trusty.username.trim(),
+      trusty.username.trim()
     );
 
     updateUser({
@@ -157,6 +159,14 @@ export default function TrustiesSection({
                       <div className="text-sm">{trusty.email}</div>
                     )}
                   </div>
+                  <Link
+                    href={`${getRoute("Inbox")}/${trusty.username}`}
+                  >
+                  <Button variant="secondary" className="mt-4">
+                    <ChatCircleDotsIcon size={18} />
+                    <span>Chat</span>
+                  </Button>
+                  </Link>
                 </div>
               ))}
               <div className="text-xs text-gray-400 mt-2">
