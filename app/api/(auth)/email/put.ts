@@ -1,6 +1,5 @@
 import { UserDB, UserTable } from "@graphql/User/db";
 import { getUser } from "@graphql/User/utils";
-import { compare } from "bcryptjs";
 import { eq } from "drizzle-orm";
 
 import { ErrorResponses } from "../../lib/auth/error-responses";
