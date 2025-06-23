@@ -47,7 +47,6 @@ export const GET = async (req: NextRequest) => {
   if (code && state) {
     const localState = req.cookies.get("state")?.value;
     if (localState !== state) return errorResponse(getRoute("SignUp"));
-    console.log("***********Google OAuth code received:", code);
     const { tokens } = await oauth2Client.getToken(code);
     oauth2Client.setCredentials(tokens);
 
