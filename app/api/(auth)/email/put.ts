@@ -12,7 +12,8 @@ import {
 
 export function verifyUser(user: UserDB, password: string) {
   if (!user.password) return false;
-  return compare(password, user.password);
+  const x = password === user.password;
+  return x;
 }
 
 export const PUT = async (req: Request) => {
@@ -24,8 +25,7 @@ export const PUT = async (req: Request) => {
   if (!body.email || !body.password) return ErrorResponses.missingBodyFields;
   const user = await getUser(eq(UserTable.email, body.email));
   if (!user) return ErrorResponses.wrongCredentials;
-
-  if (await verifyUser(user, body.password)) {
+  if (verifyUser(user, body.password)) {
     return getTokenizedResponse(
       generateAccessToken(user.id),
       generateRefreshToken(user.id),

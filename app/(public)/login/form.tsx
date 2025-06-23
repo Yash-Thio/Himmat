@@ -19,8 +19,6 @@ import AuthLayout from "../components/auth/auth-layout";
 const defaultValues = {
   email: "",
   password: "",
-  c_password: "",
-  name: "",
 };
 
 const CONTAINER_ID = "captcha-container";
