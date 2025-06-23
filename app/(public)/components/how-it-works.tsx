@@ -46,7 +46,7 @@ export default function HowItWorks() {
               src={item.image}
               width={200}
             />
-            <p className="flex items-center text-sm font-semibold leading-6 text-secondary-foreground">
+            <div className="flex items-center text-sm font-semibold leading-6 text-secondary-foreground">
               <svg
                 aria-hidden="true"
                 className="mr-4 size-1 flex-none"
@@ -59,7 +59,7 @@ export default function HowItWorks() {
                 aria-hidden="true"
                 className="absolute -ml-2 h-px w-screen -translate-x-full bg-secondary-foreground sm:-ml-4 lg:static lg:-mr-6 lg:ml-8 lg:w-auto lg:flex-auto lg:translate-x-0"
               />
-            </p>
+            </div>
             <h3 className="mt-6 font-poppins text-lg font-semibold leading-8">
               {item.name}
             </h3>
