@@ -11,7 +11,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
-// import Logo from "@/app/logo";
+import Logo from "@/app/logo";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -61,7 +61,7 @@ function Navbar({
             )}
             href={process.env.NEXT_PUBLIC_BASE_URL || "/public"}
           >
-            {/* <Logo size={36} /> */}
+            <Logo size={45} />
             <h1 className="translate-y-0.5 text-4xl leading-none  sm:hidden">
               Himmat
             </h1>

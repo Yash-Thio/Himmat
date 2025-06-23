@@ -5,7 +5,7 @@ import React, { useMemo } from "react";
 
 import { useUserNavItems } from "@/app/(dashboard)/components/useUserNavItems";
 import LinkWrapper from "@/components/link-wrapper";
-// import Logo from "@/app/logo";
+import Logo from "@/app/logo";
 import { Button } from "@/components/ui/button";
 import { getRoute } from "@/constants/routes";
 import { useToken, useUser } from "@/lib/auth-client";
@@ -24,7 +24,7 @@ export default function TopNav({
   const { all } = useUserNavItems();
   const subPages = useMemo(
     () => all.filter((item) => item.parent === activeKey),
-    [activeKey, all],
+    [activeKey, all]
   );
   const [user] = useUser();
   return (
@@ -40,10 +40,7 @@ export default function TopNav({
           {backRoute ? (
             <ArrowLeft size={32} />
           ) : (
-            // <Logo className="text-primary" size={32} />
-            <h1 className="translate-y-0.5 font-madina text-5xl leading-0">
-              Himmat
-            </h1>
+            <Logo className="text-primary" size={32} />
           )}
         </Link>
         <h2 className="font-poppins line-clamp-1 text-2xl lg:text-3xl lg:pl-0.5 lg:h-10 font-medium">
