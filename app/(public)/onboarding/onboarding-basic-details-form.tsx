@@ -28,7 +28,10 @@ export default function OnboardingBasicDetailsForm({
 }) {
   const [user, setUser] = useUser();
   const form = useForm<FormFields>({
-    defaultValues: { dob: defaultValues.dob || "2000-01-01" },
+    defaultValues: { 
+      name: defaultValues.name,
+      dob: defaultValues.dob || "2000-01-01" 
+    },
   });
   const [updateBasicDetails, { loading }] = useAuthMutation(UPDATE_USER);
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
