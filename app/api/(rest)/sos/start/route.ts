@@ -33,12 +33,6 @@ export async function POST(request: NextRequest) {
       console.error("User username not found");
       return NextResponse.json({ error: "Unauthorized" }, { status: 404 });
     }
-    console.log("**********************SOS location update:", {
-      latitude,
-      longitude,
-      accuracy,
-      timestamp,
-    });
     const locationData: locationUpdate = {
       latitude,
       longitude,
