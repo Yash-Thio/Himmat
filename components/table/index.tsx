@@ -21,8 +21,8 @@ import {
 import { ArrowDownUp } from "lucide-react";
 import React, { ReactNode, useEffect } from "react";
 
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/input";
+import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
 export default function Table<T>({

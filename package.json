@@ -6,7 +6,7 @@
     "dev": "next dev --turbopack & drizzle-kit studio",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "next lint --quiet --fix",
     "compile": "graphql-codegen",
     "watch": "graphql-codegen -w",
     "push-schema": "drizzle-kit push",

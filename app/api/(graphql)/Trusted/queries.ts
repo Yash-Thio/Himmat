@@ -1,7 +1,8 @@
 import type { AuthorizedContext } from "@backend/lib/auth/context";
 import { Arg, Authorized, Ctx, Query, Resolver } from "type-graphql";
-import { handleGetUserTrusties } from "./resolvers/get-user-trusties";
+
 import { handleIsUserTrusted } from "./resolvers/get-is-user-trusted";
+import { handleGetUserTrusties } from "./resolvers/get-user-trusties";
 import { TrustedGQL } from "./type";
 
 @Resolver()

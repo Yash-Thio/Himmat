@@ -13,8 +13,7 @@ const timeline = [
   {
     name: "Get On Board ",
     image: "/how-it-works-2.svg",
-    description:
-      "Seamlesly add details of your emergency contacts.",
+    description: "Seamlesly add details of your emergency contacts.",
   },
   {
     name: "Search Your Destination",
@@ -34,7 +33,7 @@ export default function HowItWorks() {
     <SectionWrapper
       description="Himmat makes it effortless for users to connect with help during emergencies and find the safest route possible."
       id="how-it-works"
-      prefixTitle="Safety is not a choice — it&apos;s a route."
+      prefixTitle="Safety is not a choice — it's a route."
       title="How Himmat Works"
     >
       <ol className="mx-auto grid max-w-2xl grid-cols-1 gap-8 overflow-hidden lg:mx-0 lg:max-w-none lg:grid-cols-4">

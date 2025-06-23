@@ -1,21 +1,18 @@
 "use client";
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useUser } from "@/lib/auth-client";
-import { Button } from "@/components/ui/button";
+
+import { GetCurrentUserQuery } from "@/__generated__/graphql";
 import CopyText from "@/components/copy-link";
 import Form from "@/components/form";
 import { Input } from "@/components/input";
+import { Button } from "@/components/ui/button";
 import UserImage from "@/components/user-image";
-import {
-  NAME_MAX_LENGTH,
-  USERNAME_MAX_LENGTH,
-} from "@/constants/constraints";
+import { NAME_MAX_LENGTH, USERNAME_MAX_LENGTH } from "@/constants/constraints";
 import { useAuthMutation, useAuthQuery } from "@/lib/apollo-client";
 import { UPDATE_USER } from "@/lib/mutations";
 import { IS_USERNAME_AVAILABLE } from "@/lib/queries";
 import { getUsernameInputRules } from "@/lib/utils";
-import { GetCurrentUserQuery } from "@/__generated__/graphql";
 
 import AccountCard from "./account-card";
 
@@ -25,9 +22,7 @@ function ProfileForm({
   setUser,
 }: {
   user: NonNullable<GetCurrentUserQuery["user"]>;
-  setUser: Dispatch<
-    SetStateAction<NonNullable<GetCurrentUserQuery["user"]>>
-  >;
+  setUser: Dispatch<SetStateAction<NonNullable<GetCurrentUserQuery["user"]>>>;
   onCancel: () => void;
 }) {
   const form = useForm({
@@ -108,16 +103,13 @@ export default function ProfileSection({
   return (
     <AccountCard>
       <div className="flex items-start gap-2">
-        <UserImage size={96}/>
+        <UserImage size={96} />
         <div>
           <h2 className="text-xl flex gap-x-2 gap-y-1 items-center flex-wrap">
             <span className="font-poppins">{user.name}</span>
 
             {user.username && (
-              <CopyText
-                text={user.username}
-                toastMessage="Username copied!"
-              />
+              <CopyText text={user.username} toastMessage="Username copied!" />
             )}
           </h2>
           <div className="flex gap-2 items-stretch">

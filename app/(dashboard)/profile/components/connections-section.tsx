@@ -1,25 +1,17 @@
 "use client";
 import {
   EnvelopeSimple,
-  InstagramLogo,
-  SealCheck,
+  Phone,
   SealQuestion,
-  Phone
 } from "@phosphor-icons/react/dist/ssr";
-import Link from "next/link";
 import React, { useState } from "react";
-import { useUser } from "@/lib/auth-client";
 
-import { getRoute } from "@/constants/routes";
 import { useAuthMutation } from "@/lib/apollo-client";
-import {
-  SEND_VERIFICATION_EMAIL,
-} from "@/lib/mutations";
+import { useUser } from "@/lib/auth-client";
+import { SEND_VERIFICATION_EMAIL } from "@/lib/mutations";
 
 import AccountCard from "./account-card";
-export default function ConnectionsSection({
-}: {
-}) {
+export default function ConnectionsSection() {
   const [user] = useUser();
   const [sendEmail, { data: success, loading, called }] = useAuthMutation(
     SEND_VERIFICATION_EMAIL,
@@ -76,7 +68,7 @@ export default function ConnectionsSection({
               Add phone number
             </button>
           )}
-          </div>
+        </div>
       </div>
     </AccountCard>
   );

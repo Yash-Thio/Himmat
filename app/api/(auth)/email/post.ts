@@ -1,7 +1,6 @@
 // import { getVerificationLink } from "@graphql/Request/resolvers/send-verification-email";
 import { UserTable } from "@graphql/User/db";
 import { createUser, getUser } from "@graphql/User/utils";
-import { waitUntil } from "@vercel/functions";
 import { hash } from "bcryptjs";
 import { eq } from "drizzle-orm";
 
@@ -20,8 +19,7 @@ export const POST = async (req: Request) => {
     password?: string;
   };
 
-  if (!body.email || !body.password)
-    return ErrorResponses.missingBodyFields;
+  if (!body.email || !body.password) return ErrorResponses.missingBodyFields;
   const existingUser = await getUser(eq(UserTable.email, body.email));
   if (existingUser) {
     if (await verifyUser(existingUser, body.password)) {

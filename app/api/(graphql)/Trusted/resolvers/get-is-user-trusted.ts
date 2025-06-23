@@ -1,12 +1,13 @@
 import type { AuthorizedContext } from "@backend/lib/auth/context";
 import { db } from "@backend/lib/db";
 import { eq } from "drizzle-orm";
-import { TrustedTable } from "../db";
+
 import { UserTable } from "../../User/db";
+import { TrustedTable } from "../db";
 
 export async function handleIsUserTrusted(
   ctx: AuthorizedContext,
-  username: string
+  username: string,
 ) {
   if (!ctx.userId) {
     return false;
@@ -18,6 +19,6 @@ export async function handleIsUserTrusted(
     .where(eq(UserTable.username, username))
     .limit(1);
 
-    if (!trustedRecord) return false;
-   return trustedRecord.trusted.trustedUserIds.includes(ctx.userId); 
+  if (!trustedRecord) return false;
+  return trustedRecord.trusted.trustedUserIds.includes(ctx.userId);
 }

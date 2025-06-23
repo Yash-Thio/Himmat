@@ -5,10 +5,13 @@ import React, { useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 
-import { Button } from "@/components/ui/button";
 import Form from "@/components/form";
 import { Input } from "@/components/input";
-import { USERNAME_MAX_LENGTH, USERNAME_MIN_LENGTH } from "@/constants/constraints";
+import { Button } from "@/components/ui/button";
+import {
+  USERNAME_MAX_LENGTH,
+  USERNAME_MIN_LENGTH,
+} from "@/constants/constraints";
 import { getRoute } from "@/constants/routes";
 import {
   handleGQLErrors,

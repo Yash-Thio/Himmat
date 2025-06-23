@@ -1,12 +1,8 @@
 "use client";
 import {
-  Calendar,
   CaretLeft,
   CaretRight,
-  FlagCheckered,
   Link as LinkIcon,
-  MapPin,
-  MoneyWavy,
   PencilSimple,
   ShareNetwork,
 } from "@phosphor-icons/react";
@@ -14,16 +10,13 @@ import { Spinner } from "@phosphor-icons/react/dist/ssr";
 import { useRouter } from "next/navigation";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
-import type {
-  GetDefaultOnboardingDetailsQuery,
-} from "@/__generated__/graphql";
+import type { GetDefaultOnboardingDetailsQuery } from "@/__generated__/graphql";
 import { getRoute } from "@/constants/routes";
-import { useUser } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
 
 import OnboardingBasicDetailsForm from "./onboarding-basic-details-form";
-import OnboardingUsername from "./onboarding-username";
 import OnboardingTrustedDetailsForm from "./onboarding-trusted-details-form";
+import OnboardingUsername from "./onboarding-username";
 import OnboardingStepper from "./stepper";
 
 export function getStep(
@@ -59,7 +52,9 @@ function OnboardingWizard({
   const trusties = data?.trusties;
   const router = useRouter();
   const [step, setStep] = useState(getStep(currentUser, trusties));
-  const [maxTouchedStep, setMaxTouchedStep] = useState(getStep(currentUser, trusties));
+  const [maxTouchedStep, setMaxTouchedStep] = useState(
+    getStep(currentUser, trusties),
+  );
   const nextStep = useCallback(() => {
     setStep((o) => Math.min(o + 1, MAX_STEPS - 1));
     setMaxTouchedStep((o) => Math.max(o, step + 1));
@@ -124,7 +119,7 @@ function OnboardingWizard({
           "Add Details of people you want to notify in case of an emergency.",
         icon: ShareNetwork,
         key: 2,
-        component:(
+        component: (
           <OnboardingTrustedDetailsForm
             defaultValues={{
               trusties: trusties || [],
@@ -135,14 +130,10 @@ function OnboardingWizard({
             }}
             key={2}
           />
-        )
-      }
+        ),
+      },
     ],
-    [
-      currentUser,
-      nextStep,
-      redirectURL,
-    ],
+    [currentUser, nextStep, redirectURL],
   );
 
   useEffect(() => {

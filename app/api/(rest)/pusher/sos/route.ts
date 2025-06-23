@@ -1,5 +1,6 @@
 import { context } from "@backend/lib/auth/context";
 import { NextRequest, NextResponse } from "next/server";
+
 import { handleIsUserTrusted } from "@/app/api/(graphql)/Trusted/resolvers/get-is-user-trusted";
 
 import { pusher } from "../../../lib/socket/send-event";

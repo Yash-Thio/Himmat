@@ -5,11 +5,11 @@ import React, { useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import { buttonVariants } from "@/components/ui/button";
+
 import useHandleAuthorized from "@/app/(public)/components/auth/handle-authorized";
-import { Button } from "@/components/ui/button";
 import Form from "@/components/form";
 import { Input } from "@/components/input";
+import { Button } from "@/components/ui/button";
 import { getRoute, Route } from "@/constants/routes";
 import { EMAIL_REGEX } from "@/constants/validations";
 import { useLoginWithEmail } from "@/lib/auth-client";
@@ -40,10 +40,7 @@ export default function LoginForm({
   const redirectURL = paramsRedirectURL || Route.Home;
   const onSubmit: SubmitHandler<typeof defaultValues> = async (data) => {
     setIsLoading(true);
-    const error = await loginWithEmail(
-      data.email.toLowerCase(),
-      data.password,
-    );
+    const error = await loginWithEmail(data.email.toLowerCase(), data.password);
     if (error === null) {
       setSuccess(true);
       router.push(redirectURL);

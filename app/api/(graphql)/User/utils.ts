@@ -1,10 +1,11 @@
-import { eq } from 'drizzle-orm';
-import { UserTable, UserDBInsert } from '@graphql/User/db';
-import type { Context } from '@/app/api/lib/auth/context';
-import type { SQL } from 'drizzle-orm';
-import { db } from '@/app/api/lib/db';
-import { USERNAME_REGEX } from '@/constants/regex';
-import { DBTransaction } from '@/app/api/lib/db';
+import { UserDBInsert, UserTable } from "@graphql/User/db";
+import type { SQL } from "drizzle-orm";
+import { eq } from "drizzle-orm";
+
+import type { Context } from "@/app/api/lib/auth/context";
+import { db } from "@/app/api/lib/db";
+import { DBTransaction } from "@/app/api/lib/db";
+import { USERNAME_REGEX } from "@/constants/regex";
 export async function getUser(filter: SQL) {
   const [user] = await db.select().from(UserTable).where(filter);
   return user;

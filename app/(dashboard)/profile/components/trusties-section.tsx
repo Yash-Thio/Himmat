@@ -1,20 +1,20 @@
 "use client";
-import React, { useState } from "react";
 import { Plus, Trash, Users } from "@phosphor-icons/react";
-import { useForm, useFieldArray } from "react-hook-form";
+import React, { useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/input";
+import type { GetUserTrustiesQuery } from "@/__generated__/graphql";
 import Form from "@/components/form";
-import { useUser } from "@/lib/auth-client";
-import { handleGQLErrors, useAuthMutation, useAuthQuery } from "@/lib/apollo-client";
-import { UPDATE_USER } from "@/lib/mutations";
+import { Input } from "@/components/input";
+import { Button } from "@/components/ui/button";
 import {
   USERNAME_MAX_LENGTH,
   USERNAME_MIN_LENGTH,
 } from "@/constants/constraints";
-import type { GetUserTrustiesQuery } from "@/__generated__/graphql";
+import { useAuthMutation, useAuthQuery } from "@/lib/apollo-client";
+import { useUser } from "@/lib/auth-client";
+import { UPDATE_USER } from "@/lib/mutations";
 import { IS_USERNAME_AVAILABLE } from "@/lib/queries";
 import { getUsernameInputRules } from "@/lib/utils";
 
@@ -41,7 +41,7 @@ export default function TrustiesSection({
   const [isEditing, setIsEditing] = useState(false);
   const [updateUser, { loading: updateLoading }] = useAuthMutation(UPDATE_USER);
   const [isUsernameAvailable, { loading: loadingAvailability }] = useAuthQuery(
-    IS_USERNAME_AVAILABLE
+    IS_USERNAME_AVAILABLE,
   );
   const trusties = data?.trusties || [];
 
@@ -59,22 +59,18 @@ export default function TrustiesSection({
     name: "trusties",
   });
 
-  const onSubmit: SubmitHandler<FormFields> = async (data) => {
+  const onSubmit: SubmitHandler<FormFields> = (data) => {
     const validTrusties = data.trusties.filter((trusty) =>
-      trusty.username.trim()
+      trusty.username.trim(),
     );
 
-    try {
-      await updateUser({
-        updatedUser: {
-          trusties: validTrusties,
-        },
-      });
+    updateUser({
+      updatedUser: {
+        trusties: validTrusties,
+      },
+    });
 
-      window.location.reload();
-    } catch (e) {
-      handleGQLErrors(e as any);
-    }
+    window.location.reload();
   };
 
   const addTrustedContact = () => {
@@ -244,7 +240,12 @@ export default function TrustiesSection({
             >
               Cancel
             </Button>
-            <Button variant="secondary" type="submit" className="flex-1" loading={updateLoading}>
+            <Button
+              variant="secondary"
+              type="submit"
+              className="flex-1"
+              loading={updateLoading}
+            >
               Save Changes
             </Button>
           </div>

@@ -1,10 +1,11 @@
-import { getUserIdFromRefreshToken } from "@/app/api/lib/auth/token";
 import { UserTable } from "@graphql/User/db";
 import { getUser } from "@graphql/User/utils";
 import { eq } from "drizzle-orm";
 import { verify } from "jsonwebtoken";
 import type { NextRequest } from "next/server";
 import type { AuthChecker } from "type-graphql";
+
+import { getUserIdFromRefreshToken } from "@/app/api/lib/auth/token";
 
 export interface Context {
   userId: number | null;
@@ -33,9 +34,7 @@ export async function context(req: NextRequest): Promise<Context> {
   return { userId: null };
 }
 
-export const authChecker: AuthChecker<Context> = async (
-  { context: ctx },
-) => {
+export const authChecker: AuthChecker<Context> = async ({ context: ctx }) => {
   if (!ctx.userId) return false;
   const user = await getUser(eq(UserTable.id, ctx.userId));
   if (!user) return false;

@@ -6,16 +6,16 @@ import {
   ApolloServerPluginLandingPageProductionDefault,
 } from "@apollo/server/plugin/landingPage/default";
 import { startServerAndCreateNextHandler } from "@as-integrations/next";
-import { UserFieldResolver } from "@graphql/User/fields";
-import { UserMutationResolver } from "@graphql/User/mutations";
-import { UserQueryResolver } from "@graphql/User/queries";
 import { ChatFieldResolvers } from "@graphql/Chat/fields";
 import { ChatMutationResolvers } from "@graphql/Chat/mutations";
 import { ChatQueryResolvers } from "@graphql/Chat/queries";
 import { RequestMutationResolver } from "@graphql/Request/mutations";
 import { RequestQueryResolver } from "@graphql/Request/queries";
-import { TrustedQueryResolvers } from "@graphql/Trusted/queries";
 import { SosMutationResolvers } from "@graphql/Sos/mutations";
+import { TrustedQueryResolvers } from "@graphql/Trusted/queries";
+import { UserFieldResolver } from "@graphql/User/fields";
+import { UserMutationResolver } from "@graphql/User/mutations";
+import { UserQueryResolver } from "@graphql/User/queries";
 import type { NextRequest } from "next/server";
 import { buildTypeDefsAndResolvers } from "type-graphql";
 

@@ -1,9 +1,11 @@
 import type { AuthorizedContext } from "@backend/lib/auth/context";
 import { db } from "@backend/lib/db";
 import { eq, inArray } from "drizzle-orm";
+
+import { sendBatchTemplateEmail } from "@/app/api/lib/email/send-template";
+
 import { TrustedTable } from "../../Trusted/db";
 import { UserTable } from "../../User/db";
-import { sendBatchTemplateEmail } from "@/app/api/lib/email/send-template";
 import { SosTable } from "../db";
 
 export async function handleSendSos(ctx: AuthorizedContext) {
@@ -47,7 +49,7 @@ export async function handleSendSos(ctx: AuthorizedContext) {
         firstName: user.name?.split(" ")[0] || "",
         link: `${process.env.NEXT_PUBLIC_BASE_URL}/sos/${ctx.userId}`,
       },
-    }))
+    })),
   );
 
   return true;

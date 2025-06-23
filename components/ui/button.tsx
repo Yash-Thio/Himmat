@@ -1,8 +1,7 @@
-import * as React from "react";
-import type { PropsWithChildren } from "react";
-import { Slot } from "@radix-ui/react-slot";
-import { cva, type VariantProps } from "class-variance-authority";
 import { CircleNotch } from "@phosphor-icons/react/dist/ssr";
+import { cva, type VariantProps } from "class-variance-authority";
+import type { PropsWithChildren } from "react";
+import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -34,7 +33,7 @@ const buttonVariants = cva(
       variant: "default",
       size: "default",
     },
-  }
+  },
 );
 
 export type ButtonProps = React.ComponentProps<"button"> &
@@ -57,7 +56,6 @@ function Button({
   type,
   ...props
 }: PropsWithChildren<ButtonProps>) {
-
   return (
     <button
       data-slot="button"
@@ -79,7 +77,7 @@ function Button({
       ) : (
         children
       )}
-      </button>
+    </button>
   );
 }
 

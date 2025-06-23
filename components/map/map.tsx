@@ -1,13 +1,14 @@
 "use client";
 
-import React, { useCallback, useRef, useState } from "react";
 import {
+  DirectionsRenderer,
   GoogleMap,
+  InfoWindow,
   LoadScript,
   Marker,
-  DirectionsRenderer,
-  InfoWindow,
 } from "@react-google-maps/api";
+import React, { useCallback, useRef, useState } from "react";
+
 import { cn } from "@/lib/utils";
 
 export interface LatLng {
@@ -16,37 +17,29 @@ export interface LatLng {
 }
 
 export interface MapProps {
-  // Core map properties
   center?: LatLng;
   zoom?: number;
 
-  // Location props
   userLocation?: LatLng;
   destination?: LatLng;
 
-  // Styling
   className?: string;
   mapOptions?: any;
 
-  // Markers
   showUserMarker?: boolean;
   showDestinationMarker?: boolean;
 
-  // Directions
   showDirections?: boolean;
   travelMode?: google.maps.TravelMode;
 
-  // Event handlers
   onMapClick?: (event: any) => void;
   onUserMarkerClick?: () => void;
   onDestinationMarkerClick?: () => void;
   onDirectionsLoad?: (directions: any) => void;
 
-  // Info windows
   userInfoWindow?: string | React.ReactNode;
   destinationInfoWindow?: string | React.ReactNode;
 
-  // Loading state
   loadingElement?: React.ReactNode;
 }
 
@@ -65,14 +58,16 @@ export const Map: React.FC<MapProps> = ({
   showUserMarker = true,
   showDestinationMarker = true,
   showDirections = false,
-  travelMode = google.maps.TravelMode.WALKING,
+  travelMode = "WALKING",
   onMapClick,
   onUserMarkerClick,
   onDestinationMarkerClick,
   onDirectionsLoad,
   userInfoWindow,
   destinationInfoWindow,
-  loadingElement = <div className="flex items-center justify-center">Loading map...</div>,
+  loadingElement = (
+    <div className="flex items-center justify-center">Loading map...</div>
+  ),
 }) => {
   const mapRef = useRef<any>(null);
   const [directions, setDirections] = useState<any>(null);
@@ -80,13 +75,11 @@ export const Map: React.FC<MapProps> = ({
   const [destinationInfoOpen, setDestinationInfoOpen] = useState(false);
   const googleMapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "";
 
-  // Default map container style using Tailwind classes
   const containerStyle: React.CSSProperties = {
     width: "100%",
     height: "100%",
   };
 
-  // Default map options
   const defaultMapOptions: any = {
     disableDefaultUI: false,
     zoomControl: true,
@@ -96,19 +89,36 @@ export const Map: React.FC<MapProps> = ({
     ...mapOptions,
   };
 
-  // Handle map load
   const onMapLoad = useCallback((map: any) => {
     mapRef.current = map;
   }, []);
 
-  // Calculate directions
+  const getTravelMode = useCallback((mode: string) => {
+    if (typeof window === "undefined" || !window.google) {
+      return undefined;
+    }
+
+    switch (mode) {
+      case "DRIVING":
+        return window.google.maps.TravelMode.DRIVING;
+      case "WALKING":
+        return window.google.maps.TravelMode.WALKING;
+      case "BICYCLING":
+        return window.google.maps.TravelMode.BICYCLING;
+      case "TRANSIT":
+        return window.google.maps.TravelMode.TRANSIT;
+      default:
+        return window.google.maps.TravelMode.WALKING;
+    }
+  }, []);
+
   const calculateDirections = useCallback(() => {
     console.log("calculateDirections called", {
       userLocation,
       destination,
       showDirections,
     });
-    
+
     if (
       !userLocation ||
       !destination ||
@@ -118,14 +128,20 @@ export const Map: React.FC<MapProps> = ({
       console.log("Early return - missing requirements");
       return;
     }
-    
+
     try {
       const directionsService = new window.google.maps.DirectionsService();
-
+      const googleTravelMode = getTravelMode(travelMode);
       const request = {
-        origin: new window.google.maps.LatLng(userLocation.lat, userLocation.lng),
-        destination: new window.google.maps.LatLng(destination.lat, destination.lng),
-        travelMode: travelMode,
+        origin: new window.google.maps.LatLng(
+          userLocation.lat,
+          userLocation.lng,
+        ),
+        destination: new window.google.maps.LatLng(
+          destination.lat,
+          destination.lng,
+        ),
+        travelMode: googleTravelMode || google.maps.TravelMode.WALKING,
       };
 
       console.log("Making directions request:", request);
@@ -147,7 +163,6 @@ export const Map: React.FC<MapProps> = ({
     }
   }, [userLocation, destination, travelMode, onDirectionsLoad]);
 
-  // Effect to calculate directions when locations change
   React.useEffect(() => {
     console.log("Directions useEffect triggered", {
       showDirections,
@@ -156,16 +171,14 @@ export const Map: React.FC<MapProps> = ({
     });
 
     if (showDirections && userLocation && destination) {
-      // Add delay to ensure Google Maps is fully loaded
       const timer = setTimeout(() => {
         calculateDirections();
       }, 500);
-      
+
       return () => clearTimeout(timer);
     }
   }, [showDirections, userLocation, destination, calculateDirections]);
 
-  // Determine map center
   const mapCenter = React.useMemo(() => {
     if (userLocation) return userLocation;
     if (destination) return destination;
@@ -180,7 +193,7 @@ export const Map: React.FC<MapProps> = ({
   });
 
   return (
-    <div className={cn("w-full h-96 rounded-lg overflow-hidden", className)}>
+    <div className={cn("w-full h-full overflow-hidden", className)}>
       <LoadScript
         googleMapsApiKey={googleMapsApiKey}
         loadingElement={loadingElement}
@@ -193,22 +206,11 @@ export const Map: React.FC<MapProps> = ({
           options={defaultMapOptions}
           onClick={onMapClick}
         >
-          {/* Debug info */}
-          {process.env.NODE_ENV === 'development' && (
-            <div className="absolute top-2 left-2 backdrop-blur-sm p-2 rounded text-xs z-10 shadow-sm">
-              <div>Directions: {directions ? '✅ Loaded' : '❌ Not loaded'}</div>
-              <div>Show: {showDirections ? 'Yes' : 'No'}</div>
-              <div>User: {userLocation ? '✅' : '❌'}</div>
-              <div>Dest: {destination ? '✅' : '❌'}</div>
-            </div>
-          )}
-
-          {/* User location marker */}
           {userLocation && showUserMarker && (
             <Marker
               position={userLocation}
               icon={
-                (typeof window !== "undefined" && window.google
+                typeof window !== "undefined" && window.google
                   ? {
                       url:
                         "data:image/svg+xml;charset=UTF-8," +
@@ -220,7 +222,7 @@ export const Map: React.FC<MapProps> = ({
                 `),
                       scaledSize: new window.google.maps.Size(24, 24),
                     }
-                  : undefined)
+                  : undefined
               }
               onClick={() => {
                 if (onUserMarkerClick) onUserMarkerClick();
@@ -241,12 +243,11 @@ export const Map: React.FC<MapProps> = ({
             </Marker>
           )}
 
-          {/* Destination marker */}
           {destination && showDestinationMarker && (
             <Marker
               position={destination}
               icon={
-                (typeof window !== "undefined" && window.google
+                typeof window !== "undefined" && window.google
                   ? {
                       url:
                         "data:image/svg+xml;charset=UTF-8," +
@@ -257,7 +258,7 @@ export const Map: React.FC<MapProps> = ({
                 `),
                       scaledSize: new window.google.maps.Size(24, 24),
                     }
-                  : undefined)
+                  : undefined
               }
               onClick={() => {
                 if (onDestinationMarkerClick) onDestinationMarkerClick();
@@ -278,7 +279,6 @@ export const Map: React.FC<MapProps> = ({
             </Marker>
           )}
 
-          {/* Directions renderer */}
           {showDirections && directions && (
             <DirectionsRenderer
               directions={directions}

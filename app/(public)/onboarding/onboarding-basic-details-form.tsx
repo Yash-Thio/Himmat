@@ -4,9 +4,9 @@ import { GraphQLError } from "graphql/error";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 
-import { Button } from "@/components/ui/button";
 import Form from "@/components/form";
 import { Input } from "@/components/input";
+import { Button } from "@/components/ui/button";
 import { NAME_MAX_LENGTH } from "@/constants/constraints";
 import { handleGQLErrors, useAuthMutation } from "@/lib/apollo-client";
 import { useUser } from "@/lib/auth-client";
@@ -27,7 +27,9 @@ export default function OnboardingBasicDetailsForm({
   fallbackToStep: () => void;
 }) {
   const [user, setUser] = useUser();
-  const form = useForm<FormFields>({ defaultValues: {dob: defaultValues.dob || "2000-01-01",} });
+  const form = useForm<FormFields>({
+    defaultValues: { dob: defaultValues.dob || "2000-01-01" },
+  });
   const [updateBasicDetails, { loading }] = useAuthMutation(UPDATE_USER);
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     nextStep();
@@ -50,7 +52,7 @@ export default function OnboardingBasicDetailsForm({
   };
   return (
     <Form className=" space-y-3" form={form} onSubmit={onSubmit}>
-        <User size={40} />
+      <User size={40} />
       <Input
         className="block mt-3"
         label="Full name"
@@ -60,15 +62,15 @@ export default function OnboardingBasicDetailsForm({
         maxLength={NAME_MAX_LENGTH}
       />
       <Input
-              className="block"
-              label="Date of Birth"
-              name="dob"
-              placeholder="2000-01-01"
-              rules={{
-                required: true,
-              }}
-              type="date"
-            />
+        className="block"
+        label="Date of Birth"
+        name="dob"
+        placeholder="2000-01-01"
+        rules={{
+          required: true,
+        }}
+        type="date"
+      />
       <Button
         className="mb-5! mt-8! ml-auto block"
         loading={loading}

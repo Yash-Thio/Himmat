@@ -3,7 +3,6 @@ import {
   boolean,
   date,
   index,
-  integer,
   pgTable,
   serial,
   text,

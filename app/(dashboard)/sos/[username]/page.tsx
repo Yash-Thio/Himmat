@@ -1,11 +1,13 @@
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import React from "react";
-import { cookies } from "next/headers";
+
 import { getRoute, Route } from "@/constants/routes";
-import DashboardWrapper from "../../components/dashboard-wrapper";
-import { GET_CURRENT_USER, GET_IS_USER_TRUSTED } from "@/lib/queries";
 import { queryGQL } from "@/lib/apollo-server";
 import { Injector } from "@/lib/apollo-server";
+import { GET_CURRENT_USER, GET_IS_USER_TRUSTED } from "@/lib/queries";
+
+import DashboardWrapper from "../../components/dashboard-wrapper";
 import DisplayLocation from "./components/display-location";
 
 interface SosPage {
@@ -28,10 +30,10 @@ export default async function Page({ params }: SosPage) {
                 username: (await params).username,
               },
               Cookie,
-              0
+              0,
             )
           }
-          Component={async ({ data }) => (
+          Component={async ({ data }) =>
             data?.getIsUserTrusted ? (
               <DisplayLocation
                 isTrusted={data}
@@ -39,10 +41,10 @@ export default async function Page({ params }: SosPage) {
               />
             ) : (
               <div className="text-center text-red-500">
-                You are not a trusted contact for this user.
+                You are not an emergency contact for this user.
               </div>
             )
-          )}
+          }
         />
       </div>
     </DashboardWrapper>

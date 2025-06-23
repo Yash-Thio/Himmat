@@ -4,8 +4,8 @@ import { EmailComponent } from "@backend/lib/email/types";
 
 import { sendEmail } from "./driver";
 import { ResetPassword } from "./template/reset-password";
-import { VerifyEmail } from "./template/verify";
 import { SosAlert } from "./template/sos-alert";
+import { VerifyEmail } from "./template/verify";
 
 export const Template = {
   VerifyEmail,
@@ -40,8 +40,7 @@ export function getTemplate<T extends keyof typeof Template>(
       subject: string;
       title?: string;
       components: EmailComponent[];
-    } =
-      Template[template](meta);
+    } = Template[template](meta);
     return {
       to,
       subject: method.subject,

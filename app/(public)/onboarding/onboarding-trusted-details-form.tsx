@@ -1,22 +1,22 @@
 "use client";
-import { UserCircle, Trash, Plus } from "@phosphor-icons/react";
+import { Plus, Trash, UserCircle } from "@phosphor-icons/react";
 import { GraphQLError } from "graphql/error";
 import type { SubmitHandler } from "react-hook-form";
 import { useFieldArray, useForm } from "react-hook-form";
 
-import { Button } from "@/components/ui/button";
 import Form from "@/components/form";
 import { Input } from "@/components/input";
-import { handleGQLErrors, useAuthMutation } from "@/lib/apollo-client";
-import { useUser } from "@/lib/auth-client";
-import { UPDATE_USER } from "@/lib/mutations";
-import { IS_USERNAME_AVAILABLE } from "@/lib/queries";
-import { getUsernameInputRules } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import {
   USERNAME_MAX_LENGTH,
   USERNAME_MIN_LENGTH,
 } from "@/constants/constraints";
+import { handleGQLErrors, useAuthMutation } from "@/lib/apollo-client";
 import { useAuthQuery } from "@/lib/apollo-client";
+import { useUser } from "@/lib/auth-client";
+import { UPDATE_USER } from "@/lib/mutations";
+import { IS_USERNAME_AVAILABLE } from "@/lib/queries";
+import { getUsernameInputRules } from "@/lib/utils";
 
 interface TrustedContact {
   username: string;
@@ -37,7 +37,7 @@ export default function OnboardingTrustedDetailsForm({
 }) {
   const [user, setUser] = useUser();
   const [isUsernameAvailable, { loading: loadingAvailability }] = useAuthQuery(
-    IS_USERNAME_AVAILABLE
+    IS_USERNAME_AVAILABLE,
   );
   const form = useForm<FormFields>({
     defaultValues: {
@@ -54,7 +54,7 @@ export default function OnboardingTrustedDetailsForm({
   const [updateTrustedDetails, { loading }] = useAuthMutation(UPDATE_USER);
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     const validTrusties = data.trusties.filter((trusty) =>
-      trusty.username.trim()
+      trusty.username.trim(),
     );
 
     if (validTrusties.length === 0) {

@@ -37,7 +37,7 @@ export const GET = async (req: NextRequest) => {
     res.cookies.set("state", state, {
       httpOnly: true,
       secure: true,
-    })
+    });
     return res;
   }
   if (error) {

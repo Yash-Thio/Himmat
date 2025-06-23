@@ -6,9 +6,9 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 
 import useHandleAuthorized from "@/app/(public)/components/auth/handle-authorized";
-import { Button } from "@/components/ui/button";
 import Form from "@/components/form";
 import { Input } from "@/components/input";
+import { Button } from "@/components/ui/button";
 import { getRoute, Route } from "@/constants/routes";
 import { EMAIL_REGEX } from "@/constants/validations";
 import { useSignUpWithEmail } from "@/lib/auth-client";
@@ -41,7 +41,7 @@ export default function SignupForm({
 
   const onSubmit: SubmitHandler<typeof defaultValues> = async (data) => {
     setIsLoading(true);
-    if(data.password !== data.c_password) {
+    if (data.password !== data.c_password) {
       toast.error("Passwords do not match");
       setIsLoading(false);
       return;

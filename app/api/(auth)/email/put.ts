@@ -21,8 +21,7 @@ export const PUT = async (req: Request) => {
     password?: string;
   };
 
-  if (!body.email || !body.password)
-    return ErrorResponses.missingBodyFields;
+  if (!body.email || !body.password) return ErrorResponses.missingBodyFields;
   const user = await getUser(eq(UserTable.email, body.email));
   if (!user) return ErrorResponses.wrongCredentials;
 

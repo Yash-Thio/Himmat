@@ -1,6 +1,7 @@
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
-import { getRoute } from "@/constants/routes";
+
 import { GetCurrentUserQuery } from "@/__generated__/graphql";
+import { getRoute } from "@/constants/routes";
 
 const NAVBAR_COMMON_SECTIONS = [
   { label: "How it works", href: "/#how-it-works" },

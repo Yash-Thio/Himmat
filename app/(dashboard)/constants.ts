@@ -1,11 +1,7 @@
 import { ChatCircleDots } from "@phosphor-icons/react";
 import {
-  ClockCounterClockwise,
   Gear,
-  Handshake,
   MagnifyingGlass,
-  MoneyWavy,
-  Plus,
   UserCircle,
 } from "@phosphor-icons/react/dist/ssr";
 

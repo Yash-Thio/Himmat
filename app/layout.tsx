@@ -12,9 +12,9 @@ import { queryGQL } from "@/lib/apollo-server";
 import { GlobalStateWrapper } from "@/lib/auth-client";
 import { GET_CURRENT_USER } from "@/lib/queries";
 
+import SOSButton from "./(dashboard)/components/sos-button";
 import AuthApply from "./(public)/components/auth/auth-apply";
 import TokenApply from "./(public)/components/auth/token-apply";
-import SOSButton from "./(dashboard)/components/sos-button";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

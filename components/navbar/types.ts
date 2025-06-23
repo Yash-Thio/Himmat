@@ -1,7 +1,7 @@
 import type { ReactElement } from "react";
 
-import { ButtonProps } from "@/components/ui/button";
 import { GetCurrentUserQuery } from "@/__generated__/graphql";
+import { ButtonProps } from "@/components/ui/button";
 
 export interface NavbarProps {
   secondaryLinks: NavbarLink[];

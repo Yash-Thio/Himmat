@@ -1,6 +1,7 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import {Map, LatLng} from "@/components/map/map";
+import React, { useEffect, useState } from "react";
+
+import { LatLng, Map } from "@/components/map/map";
 // import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 
 // function page() {
@@ -55,21 +56,18 @@ export default function TravelPage() {
   const [isLoadingLocation, setIsLoadingLocation] = useState(true);
 
   useEffect(() => {
-    // Check if geolocation is supported
     if (!navigator.geolocation) {
       setLocationError("Geolocation is not supported by this browser.");
       setIsLoadingLocation(false);
       return;
     }
 
-    // Options for geolocation
     const options: PositionOptions = {
-      enableHighAccuracy: true, // Use GPS if available
-      timeout: 10000, // Timeout after 10 seconds
-      maximumAge: 60000, // Cache location for 1 minute
+      enableHighAccuracy: true,
+      timeout: 10000,
+      maximumAge: 60000,
     };
 
-    // Success callback
     const handleSuccess = (position: GeolocationPosition) => {
       const { latitude, longitude } = position.coords;
       setUserLocation({
@@ -81,10 +79,9 @@ export default function TravelPage() {
       console.log("User location obtained:", { lat: latitude, lng: longitude });
     };
 
-    // Error callback
     const handleError = (error: GeolocationPositionError) => {
       setIsLoadingLocation(false);
-      
+
       switch (error.code) {
         case error.PERMISSION_DENIED:
           setLocationError("Location access denied by user.");
@@ -96,21 +93,25 @@ export default function TravelPage() {
           setLocationError("Location request timed out.");
           break;
         default:
-          setLocationError("An unknown error occurred while retrieving location.");
+          setLocationError(
+            "An unknown error occurred while retrieving location.",
+          );
           break;
       }
       console.error("Geolocation error:", error);
     };
 
-    // Get current position
-    navigator.geolocation.getCurrentPosition(handleSuccess, handleError, options);
+    navigator.geolocation.getCurrentPosition(
+      handleSuccess,
+      handleError,
+      options,
+    );
   }, []);
 
-  // Retry function for location access
   const retryLocation = () => {
     setIsLoadingLocation(true);
     setLocationError(null);
-    
+
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
@@ -123,17 +124,18 @@ export default function TravelPage() {
       },
       (error) => {
         setIsLoadingLocation(false);
-        setLocationError("Failed to get location. Please enable location access.");
+        setLocationError(
+          "Failed to get location. Please enable location access.",
+        );
       },
       {
         enableHighAccuracy: true,
         timeout: 10000,
-        maximumAge: 0, // Don't use cached location on retry
-      }
+        maximumAge: 0,
+      },
     );
   };
 
-  // Loading state
   if (isLoadingLocation) {
     return (
       <div className="w-full h-screen flex items-center justify-center bg-gray-50">
@@ -145,7 +147,6 @@ export default function TravelPage() {
     );
   }
 
-  // Error state
   if (locationError && !userLocation) {
     return (
       <div className="w-full h-screen flex items-center justify-center bg-gray-50">
@@ -161,7 +162,8 @@ export default function TravelPage() {
             Try Again
           </button>
           <p className="text-sm text-gray-500 mt-4">
-            Please enable location access in your browser settings to use this feature.
+            Please enable location access in your browser settings to use this
+            feature.
           </p>
         </div>
       </div>

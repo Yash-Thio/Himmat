@@ -1,19 +1,17 @@
 "use client";
-import Image from "next/image";
 import { useUser } from "@/lib/auth-client";
-import Features from "./components/features";
-import HowItWorks from "./components/how-it-works";
 
-import { Button } from "@/components/ui/button";
+import Features from "./components/features";
 import { HeroSection } from "./components/hero";
+import HowItWorks from "./components/how-it-works";
 export default function Home() {
   const [user] = useUser();
 
   return (
     <>
-        <HeroSection />
-        <HowItWorks />
-        <Features />
+      <HeroSection />
+      <HowItWorks />
+      <Features />
     </>
   );
 }

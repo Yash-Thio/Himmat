@@ -57,10 +57,7 @@ export default function ChatList({ chats }: { chats: GetChatsQuery["chats"] }) {
                 selectedChat === chat.user?.username ? "bg-secondary" : "",
               )}
             >
-              <UserImage
-                size={54}
-                alt={chat.user?.name || ""}
-              />
+              <UserImage size={54} alt={chat.user?.name || ""} />
               <div
                 className={cn(
                   "min-w-0 flex-1",

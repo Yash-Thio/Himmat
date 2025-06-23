@@ -11,9 +11,7 @@ import React, {
   useState,
 } from "react";
 
-import {
-  GetCurrentUserQuery,
-} from "@/__generated__/graphql";
+import { GetCurrentUserQuery } from "@/__generated__/graphql";
 
 type CurrentUser = GetCurrentUserQuery["user"];
 
@@ -56,8 +54,8 @@ export function GlobalStateWrapper({ children }: PropsWithChildren) {
   const [isSosActive, setIsSosActive] = useState(false);
 
   useEffect(() => {
-    const sosActive = localStorage.getItem('sos_active');
-    if (sosActive === 'true') {
+    const sosActive = localStorage.getItem("sos_active");
+    if (sosActive === "true") {
       setIsSosActive(true);
     }
   }, []);
@@ -91,11 +89,7 @@ export function GlobalStateWrapper({ children }: PropsWithChildren) {
 export function useSignUpWithEmail() {
   const { setToken } = useContext(GlobalState);
   return useCallback(
-    async (
-      email: string,
-      password: string,
-      name: string,
-    ) => {
+    async (email: string, password: string, name: string) => {
       const res = await fetch(`/api/email`, {
         method: "POST",
         body: JSON.stringify({

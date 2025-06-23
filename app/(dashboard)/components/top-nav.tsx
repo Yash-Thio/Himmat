@@ -4,10 +4,9 @@ import Link from "next/link";
 import React, { useMemo } from "react";
 
 import { useUserNavItems } from "@/app/(dashboard)/components/useUserNavItems";
+import LinkWrapper from "@/components/link-wrapper";
 // import Logo from "@/app/logo";
 import { Button } from "@/components/ui/button";
-import { Variants } from "@/components/constants";
-import LinkWrapper from "@/components/link-wrapper";
 import { getRoute } from "@/constants/routes";
 import { useToken, useUser } from "@/lib/auth-client";
 

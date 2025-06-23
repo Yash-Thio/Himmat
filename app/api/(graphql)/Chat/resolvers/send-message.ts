@@ -8,9 +8,8 @@ import { db } from "@backend/lib/db";
 // import { sendTemplateEmail } from "@backend/lib/email/send-template";
 import { sendEvent } from "@backend/lib/socket/send-event";
 import { waitUntil } from "@vercel/functions";
-import { and, arrayContains, desc, eq, gt } from "drizzle-orm";
+import { arrayContains } from "drizzle-orm";
 
-import { UserTable } from "../../User/db";
 import { ConversationMessageTable, ConversationTable } from "../db";
 
 export interface MessageProfanityCheck {

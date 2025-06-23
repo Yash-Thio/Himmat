@@ -1,10 +1,14 @@
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
-import { USERNAME_MAX_LENGTH, USERNAME_MIN_LENGTH } from "@/constants/constraints";
+import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+import {
+  USERNAME_MAX_LENGTH,
+  USERNAME_MIN_LENGTH,
+} from "@/constants/constraints";
 import { USERNAME_REGEX } from "@/constants/regex";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
 export const getUsernameInputRules = (

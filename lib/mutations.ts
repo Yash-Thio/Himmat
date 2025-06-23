@@ -7,7 +7,6 @@ export const UPDATE_USER = gql(`
   }
 `);
 
-
 export const READ_MESSAGE = gql(`
   #graphql
   mutation ReadMessage($conversationID:Int!) {
@@ -21,7 +20,6 @@ export const SEND_CHAT = gql(`
     sendMessage(userID: $userID, body: $body)
   }
 `);
-
 
 export const SEND_RESET_PASSWORD_EMAIL = gql(`
   #graphql

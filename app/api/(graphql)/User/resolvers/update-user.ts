@@ -1,24 +1,25 @@
 import type { AuthorizedContext } from "@backend/lib/auth/context";
 import GQLError from "@backend/lib/constants/errors";
 import { db } from "@backend/lib/db";
-import { UserTable } from "../db";
-import { TrustedTable } from "../../Trusted/db";
 import { usernameAllowed } from "@graphql/User/utils";
 import {
+  ArrayMaxSize,
+  IsArray,
   IsDateString,
   IsNumberString,
   Matches,
   MaxLength,
-  ArrayMaxSize,
   ValidateNested,
-  IsArray,
-  IsEmail,
 } from "class-validator";
 import { eq } from "drizzle-orm";
 import { revalidateTag } from "next/cache";
 import { Field, InputType } from "type-graphql";
+
 import { NAME_MAX_LENGTH, USERNAME_MAX_LENGTH } from "@/constants/constraints";
 import { USERNAME_REGEX } from "@/constants/regex";
+
+import { TrustedTable } from "../../Trusted/db";
+import { UserTable } from "../db";
 
 @InputType("TrustedContactInput")
 export class TrustedContactInput {
@@ -53,7 +54,7 @@ export class UpdateUserInput {
 
 export async function handleUpdateUser(
   ctx: AuthorizedContext,
-  updatedUser: UpdateUserInput
+  updatedUser: UpdateUserInput,
 ) {
   if (updatedUser.username && !usernameAllowed(updatedUser.username)) {
     throw GQLError(400, "Invalid username");
