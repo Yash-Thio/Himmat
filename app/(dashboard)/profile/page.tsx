@@ -10,7 +10,7 @@ import DashboardWrapper from "../components/dashboard-wrapper";
 import ConnectionsSection from "./components/connections-section";
 import ProfileSection from "./components/profile-section";
 import TrustiesSection from "./components/trusties-section";
-export default async function ProfilePage() {
+export default async function page() {
   const Cookie = await cookies();
   const { user } = await queryGQL(GET_CURRENT_USER, undefined, Cookie, 0);
   if (!user)
