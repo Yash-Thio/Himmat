@@ -146,7 +146,7 @@ export default function TravelPage() {
       // });
 
       const response = await fetch(
-        "https://router-api-53al.onrender.com/route",
+        `${process.env.NEXT_PUBLIC_ROUTE_API}`,
         {
           method: "POST",
           headers: {
