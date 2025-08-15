@@ -1,5 +1,5 @@
-// import ForgotPasswordForm from "./form";
+import ForgotPasswordForm from "./form";
 
-// export default function ForgotPasswordPage() {
-//   return <ForgotPasswordForm />;
-// }
+export default function ForgotPasswordPage() {
+  return <ForgotPasswordForm />;
+}
