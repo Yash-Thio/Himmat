@@ -9,7 +9,7 @@ import {
 import { X } from "@phosphor-icons/react";
 import type { PropsWithChildren, ReactNode } from "react";
 
-import { Button } from "./button";
+import { Button } from "./ui/button";
 
 export default function Modal({
   open,
@@ -51,7 +51,7 @@ export default function Modal({
                     <DialogTitle className="text-xl font-medium font-poppins text-gray-900">
                       {title}
                     </DialogTitle>
-                    <Button onClick={close} square borderless invert>
+                    <Button onClick={close} variant="ghost" compact size="icon">
                       <X size={18} weight="bold" />
                     </Button>
                   </div>
